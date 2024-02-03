@@ -1,0 +1,590 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500&display=swap');
+
+* {
+    padding: 0;
+    margin: 1px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.pl{
+    
+    color: brown;
+    font-size: 30px;
+}
+
+#first{
+    
+    display: flex;
+    justify-content:space-between;
+    margin-left: 10%;
+    align-content: center;
+    margin-right: 10%;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    font-size: 20px;
+    border-radius: 30px;
+    height: 80%;
+}
+
+#grises{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    color: rgb(232,232,232);
+    width: 400px;
+}
+
+#first11{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    
+
+}
+
+#first12{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+
+
+.img{
+    height: 15px;
+    width: 15px;
+    
+}
+
+
+#second{
+    
+    background-color: rgb(232,232,232);
+    border-radius: 4%;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 600px;
+    border-radius: 30px;
+    
+}
+
+#second1{
+  padding-top: 130px;
+    margin-left: 135px;
+
+}
+
+#be{
+  font-size: 20px;
+    
+}
+
+#we{
+    font-size: 60px;
+    
+}
+
+#he{
+  font-size: 140px;
+  
+  color: white;
+  
+  
+}  
+
+#second2{
+    
+    display: flex;
+    justify-content: space-between;
+    margin-left: 120px;
+    margin-right: 105px;
+}
+
+#second22{
+    
+    font-size: 15px;
+}
+
+#select1{
+
+    font-size: 12px;
+    width:150px;
+    height: 35px;
+    background-color: rgb(240, 7, 7);
+    color: white;
+    margin-left: 20px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+#exp{
+
+font-weight: bolder;
+display: flex;
+justify-content: flex-end;
+}
+
+.img2{
+    height: 500px;
+    width: 500px;
+    margin-left: 350px;
+    position: absolute;
+   
+
+}
+
+#third{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 40px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 30px;
+    
+}
+
+#third1{
+    
+    
+    margin-right: 15px;
+}
+
+#third11{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+    
+}
+
+#third111{
+    background-color: rgb(24, 22, 22);
+    margin-right: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 320px;
+    border-radius: 30px;
+    padding-left: 15px;
+}
+
+#enj{
+    font-size: 17px;
+    color: white;
+}
+#with{
+    font-size: 35px;
+    color: white;
+}
+#ear{
+    font-size: 40px;
+    color: rgb(165, 164, 167);
+}
+#select2{
+
+    font-size: 15px;
+    width:100px;
+    height: 35px;
+    background-color: rgb(240, 7, 7);
+    color: white;
+    margin-top: 10px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#third112{
+    background-color: rgb(228, 189, 14);
+    margin-right: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 320px;
+    border-radius: 30px;
+    padding-left: 15px;
+}
+
+#new{
+    font-size: 17px;
+    color: white;
+}
+#wear{
+    font-size: 35px;
+    color: white;
+}
+#gadgets{
+    font-size: 40px;
+    color: rgb(254, 255, 255);
+}
+#select3{
+
+    font-size: 15px;
+    width:100px;
+    height: 35px;
+    background-color: white;
+    color: rgb(250, 235, 20);
+    margin-top: 10px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#third12{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(232,232,232);
+    margin-top: 15px;
+    height: 320px;
+    padding-left: 70px;
+    border-radius: 30px;
+}
+
+#best{
+    color: black;
+    font-size: 17px;
+    
+}
+#gaming{
+    color: black;
+    font-size: 35px;
+    
+}
+#console{
+    font-size: 45px;
+    color: rgb(254, 255, 255);
+}
+#select4{
+
+    font-size: 15px;
+    width:100px;
+    height: 35px;
+    background-color: rgb(240, 7, 7);
+    color: white;
+    margin-top: 10px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#third2{
+    margin-left: 15px;
+    
+    
+}
+
+
+#third21{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(218, 45, 45);
+    margin-bottom: 15px;
+    height: 320px;
+    border-radius: 30px;
+    padding-left: 70px ;
+}
+
+#trend{
+    color: white;
+    font-size: 17px;
+    
+}
+#devices{
+    color: white;
+    font-size: 35px;
+    
+}
+#laptop{
+    font-size: 45px;
+    color: rgb(254, 255, 255);
+}
+#select5{
+
+    font-size: 15px;
+    width:100px;
+    height: 35px;
+    background-color: white;
+    color: rgb(218, 45, 45);
+    margin-top: 10px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#third22{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 320px;
+}
+
+#third221{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(16, 175, 77);
+    margin-top: 15px;
+    margin-right: 15px; 
+    height: 320px;
+    border-radius: 30px;
+    padding-left: 15px;
+}
+
+#play{
+    color: black;
+    font-size: 20px;
+    
+}
+#game{
+    color: black;
+    font-size: 35px;
+    
+}
+#oculus{
+    font-size: 50px;
+    color: rgb(194, 194, 194);
+}
+#select6{
+
+    font-size: 15px;
+    width:100px;
+    height: 35px;
+    background-color: rgb(240, 7, 7);
+    color: white;
+    margin-top: 10px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#third222{
+    background-color: rgb(12, 99, 214);
+    margin-top: 15px;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 320px;
+    border-radius: 30px;
+    padding-left: 15px;
+    border-radius: 30px;
+    
+}
+
+#new1{
+    font-size: 17px;
+    color: white;
+}
+#amazon{
+    font-size: 35px;
+    color: white;
+}
+#speaker{
+    font-size: 40px;
+    color: rgb(165, 164, 167);
+}
+#select7{
+
+    font-size: 15px;
+    width:100px;
+    height: 35px;
+    background-color: rgb(240, 7, 7);
+    color: white;
+    margin-top: 10px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.art1{
+    position: absolute; 
+    margin-bottom: 70px;
+    margin-left: 60px;
+    height: 200px;
+    width: 200px;
+}
+
+
+.art2{
+    position: absolute; 
+    margin-bottom: 110px;
+    margin-left: 40px;
+    height: 220px;
+    width: 220px;
+
+}
+.art3{
+    position: absolute; 
+    margin-left: 200px;
+    
+    height: 260px;
+    width: 250px;
+
+}
+.art4{
+    position: absolute; 
+    margin-left: 200px;
+    
+    height: 240px;
+    width: 220px;
+
+}
+.art5{
+    position: absolute; 
+    margin-bottom: 120px;
+    margin-left: 100px;
+    height: 160px;
+    width: 135px;
+}
+.art6{
+    position: absolute; 
+    margin-bottom: 220px;
+    margin-left: 60px;
+    height: 150px;
+    width: 150px;
+}
+
+#fourth{
+
+    display: flex;
+    justify-content: space-between;
+    margin-top:50px;
+    font-size: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+   
+}
+
+#fourthA{
+    display: flex;
+    
+    
+}
+
+#fourthA22{
+    color: rgb(209, 187, 187)
+}
+#fourthB{
+    display: flex;
+    
+}
+
+#fourthB22{
+    color: rgb(209, 187, 187)
+}
+#fourthC{
+    display: flex;
+    
+}
+
+#fourthC22{
+    color: rgb(209, 187, 187)
+}
+#fourthD{
+    display: flex;
+    
+}
+
+#fourthD22{
+    color: rgb(209, 187, 187)
+}
+
+#fifth{
+    display: flex;
+    justify-content:space-around;
+    background-color: rgb(223, 44, 44);
+    border-radius: 4%;
+    margin-top: 150px;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 340px;
+    border-radius: 30px;
+}
+
+#fifthA{
+    
+    margin-top:60px
+    
+}
+#fifthB{
+    margin-top:60px
+}
+
+#fifthA1{
+    font-size: 18px;
+    color: rgb(165, 164, 167);
+}
+#fifthA2{
+    font-size: 40px;
+    color: white;
+}
+#fifthA3{
+    font-size: 18px;
+    color: rgb(165, 164, 167);
+}
+#beats{
+    position: absolute;
+    margin-left: 350px;
+    margin-top: 60px;
+    height: 400px;
+    width: 400px;
+}
+
+#fifthB1{
+    font-size: 16px;
+    color: rgb(165, 164, 167);
+}
+#fifthB2{
+    font-size: 30px;
+    color: white;
+}
+#fifthB3{
+    font-size: 18px;
+    color: rgb(165, 164, 167);
+}
+#select8{
+
+    font-size: 15px;
+    width:100px;
+    height: 35px;
+    background-color: white;
+    color: rgb(240, 7, 7);
+    margin-top: 10px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#sixth{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 150px;
+}
+
+#seller{
+    font-size: 30px;
+}
+#passage{
+    font-size: 18px;
+    color: rgb(104, 100, 109);
+}
+
+

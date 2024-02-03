@@ -1,0 +1,63 @@
+#servicios1 {
+    background: #f8f8f8;
+    justify-content: center;
+
+}
+.servicios{
+  display: flex;
+  justify-content: center; 
+}
+.uu{
+ margin-top: 70px;
+}
+
+
+#caja3 {
+ display: grid;
+ height: 100vh;
+
+
+ grid-template-columns: repeat(3, 1fr);
+ grid-template-rows: repeat(2, 1fr);
+ column-gap: 25px;
+ row-gap: 20px;
+padding: 5%;
+
+}
+
+
+.caja33{
+background-color: rgb(248, 247, 247);
+border: 1px solid #ccc;
+padding: 5%;
+display: grid;
+border-radius: 10px;
+text-align: center;
+align-content: space-evenly;
+} 
+.lineaa{
+margin-inline-end: 132px;
+margin-inline-start: 132px;
+}
+
+
+
+#fas {
+
+ font-weight: 900;
+ line-height: 60px;
+ background-color: #c6c6c6;
+ border-radius: 50%;
+ width: 60px;
+ height: 60px;
+ margin: auto;
+}
+  
+.letrac{
+font-size: 30px;
+
+}
+.enunciado{
+word-spacing: 62px;
+font-size: 20px;
+}
