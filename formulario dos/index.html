@@ -95,18 +95,54 @@
   }
 
   function pintar() {
-    let resultadosDiv = document.getElementById("listado");
-    resultadosDiv.innerHTML = "";
+  let resultadosDiv = document.getElementById("listado");
+  resultadosDiv.innerHTML = "";
 
-    data.forEach((item, i) => {
-      let ul = document.createElement("ul");
-      let li = document.createElement("li");
-      li.textContent = `-Nombre:${item.nombre} -Apellido:${item.apellidos} -Genero:${item.genero} -Nacimiento:${item.fecha_nacimiento} 
-       -Telefono:${item.telefono} -TC:${item.tipo_documento} -Numero TC:${item.numero_documento} -Email:${item.email}`;
-      ul.appendChild(li);
-      resultadosDiv.appendChild(ul);
+  let tabla = document.createElement("table");
+  tabla.style.borderCollapse = "collapse";
+
+  let thead = document.createElement("thead");
+  let headerRow = document.createElement("tr");
+  let headers = Object.keys(data[0]);
+  headers.forEach(header => {
+    let th = document.createElement("th");
+    th.textContent = header;
+    headerRow.appendChild(th);
+  });
+  thead.appendChild(headerRow);
+  tabla.appendChild(thead);
+
+  let tbody = document.createElement("tbody");
+  data.forEach(item => {
+    let row = document.createElement("tr");
+    headers.forEach(header => {
+      let td = document.createElement("td");
+      td.textContent = item[header];
+      row.appendChild(td);
     });
+    tbody.appendChild(row);
+  });
+  tabla.appendChild(tbody);
+
+  for (let row of tabla.rows) {
+    for (let cell of row.cells) {
+      cell.style.border = "1px solid #ccc";
+      if (row === tabla.rows[0]) {
+        cell.style.borderTopWidth = "2px";
+      }
+      if (row === tabla.rows[tabla.rows.length - 1]) {
+        cell.style.borderBottomWidth = "2px";
+      }
+      if (cell === row.cells[0]) {
+        cell.style.borderLeftWidth = "2px";
+      }
+      if (cell === row.cells[row.cells.length - 1]) {
+        cell.style.borderRightWidth = "2px";
+      }
+    }
   }
+  resultadosDiv.appendChild(tabla);
+}
 </script>
 
 </html>

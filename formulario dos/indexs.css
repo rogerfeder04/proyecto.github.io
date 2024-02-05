@@ -10,32 +10,38 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    margin-top: 10px; /* Ajuste para espacio en la parte superior */
 }
-#caja{
+
+#caja {
     background-color: #5b98af;
     width: 395px;
-    margin: 20%;
-    border-radius:15px;
+    margin: 10%;
+    border-radius: 15px;
     padding: 5px 10px;
 }
-#cedulas{
+
+#cedulas {
     margin-top: 5px;
 }
+
 .center-form {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px; /* Ajuste para espacio en la parte superior */
 }
+
 #gen {
     text-align: center;
+    margin-top: 10px; /* Ajuste para espacio en la parte superior */
 }
 
 #gen div {
     display: inline-block;
     text-align: left; /* Alinear etiquetas a la izquierda */
     margin-right: 25px; /* Espacio entre las opciones */
-    
 }
 
 #gen label {
@@ -50,6 +56,7 @@ body {
 ul {
     list-style: none;
     padding: 0;
+    margin-top: 10px; /* Ajuste para espacio en la parte superior */
 }
 
 ul li {
@@ -67,6 +74,7 @@ input, select {
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin-top: 0px; /* Ajuste para espacio en la parte superior */
 }
 
 button {
@@ -77,26 +85,20 @@ button {
     border-radius: 4px;
     cursor: pointer;
     margin-left: 158px;
-    margin-top: 5px;
+    margin-top: 10px; /* Ajuste para espacio en la parte superior */
 }
 
-button:hover {
-    background-color: #45a049;
-}
-
- 
 #listado {
     border: 1px solid #ccc;
     padding: 10px;
     position: absolute;
-    top: 735px;
+    top: 655px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-top: 10px; /* Ajuste para espacio en la parte superior */
 }
-
 
 #listado h2 {
     margin-bottom: 10px;
-
 }

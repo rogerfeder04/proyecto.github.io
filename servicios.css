@@ -61,3 +61,49 @@ font-size: 30px;
 word-spacing: 62px;
 font-size: 20px;
 }
+@media (max-width: 767px) {
+  .caja33 {
+      padding: 2%;
+  }
+
+  .letrac {
+      font-size: 24px;
+  }
+
+  .enunciado {
+      word-spacing: 52px;
+      font-size: 22px;
+  }
+}
+
+/* Media query para pantallas medianas */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .caja33 {
+      padding: 5%;
+  }
+
+  .letrac {
+      font-size: 26px;
+  }
+
+  .enunciado {
+      word-spacing: 56px;
+      font-size: 24px;
+  }
+}
+
+/* Media query para pantallas grandes */
+@media (min-width: 1024px) {
+  .caja33 {
+      padding: 5%;
+  }
+
+  .letrac {
+      font-size: 30px;
+  }
+
+  .enunciado {
+      word-spacing: 62px;
+      font-size: 20px;
+  }
+}
