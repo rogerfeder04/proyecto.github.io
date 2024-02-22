@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="pagina.css">
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <h1>LO MEJOR EN LIMPIEZA PARA EL HOGAR</h1>
+        </div>
+
+        <button class="btn-show-info"> añadidos_car
+            <div id="itemsList"></div></button>
+      
+    </header>
+    <section>
+        <div id="contenedor">
+            <div>
+            <div id="imagen"> <img    src="./imagenes/images.jfif" alt="Producto"></div>
+            <div class="info">
+                <h2 id="producto">Jabon liquido</h2>
+                <p class="precio">$ 12000</p>
+                <p class="descripcion">Jabon lavaplatos 750 ml</p>
+                <button class="añadir" onclick="agregar_item_carro(this)">añadir_al_carrito</button>
+            </div>
+        </div>
+        <div >
+            <div id="imagen"><img  src="./imagenes/jabondesengrasante.jfif" alt="Producto">  </div>
+                <div class="info">
+                     <h2 id="producto">Jabon desengrasante</h2>
+                    <p class="precio">$ 25000</p>
+                    <p class="descripcion">Jabon multiusos por 1000 ml</p>
+                    <button class="añadir" onclick="agregar_item_carro(this)">añadir_al_carrito</button>
+                </div>
+            </div>
+                <div>
+                    <br><br>
+                <div id="imagen"><img    src="./imagenes/esponja2.jfif" alt="Producto"> </div>
+                    <div class="info">
+                        <h2 id="producto">Esponjas limpieza cocina </h2>
+                        <p class="precio">$ 15000</p>
+                        <p class="descripcion">Juego de esponjas por 12 unidades</p>
+                        <button class="añadir" onclick="agregar_item_carro(this)">añadir_al_carrito</button>
+                    </div>
+                </div>
+        </div>
+    </section>
+    <script>
+        function agregar_item_carro(btn) {
+            // Obtener el elemento padre del botón
+            let element = btn.parentElement.parentElement;
+
+            // Crear los elementos para el carrito
+            let itemInCart = document.createElement("div");
+            let itemName = document.createElement("p");
+            let itemPrice = document.createElement("p");
+            let itemImage = document.createElement("img");
+
+            // Asignar clases y estilos (opcional)
+            itemInCart.classList.add("item-in-cart");
+            itemImage.classList.add("item-image");
+            itemName.classList.add("item-name");
+            itemPrice.classList.add("item-price");
+
+            // Asignar los valores correspondientes
+            itemName.textContent = element.querySelector(".info h2").textContent;
+            itemPrice.textContent = element.querySelector(".info p").textContent;
+            itemImage.src = element.getElementsByTagName("img")[0].src;
+
+            // Agregar los elementos al carrito
+            document.getElementById("itemsList").appendChild(itemInCart);
+            itemInCart.appendChild(itemImage);
+            itemInCart.appendChild(itemName);
+            itemInCart.appendChild(itemPrice);
+
+            // Actualizar el botón de selección
+            let btnCart = document.querySelector(".btn-cart");
+            btnCart.innerHTML = `<span class="cart-icon"></span> seleccion: ${element.querySelector(".info h2").textContent}`;
+        }
+
+        function mostrar_informacion() {
+            let items = document.querySelectorAll(".item-in-cart");
+            let info = "Productos en el carrito:\n";
+
+            items.forEach(function(item) {
+                let itemName = item.querySelector(".item-name").textContent;
+                let itemPrice = item.querySelector(".item-price").textContent;
+                info += `${itemName} - ${itemPrice}\n`;
+            });
+
+            alert(info);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </a>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dos.css">
+    <title>Formulario</title>
+
+</head>
+
+<body>
+
+
+    <div id="tabla">
+        <h1>Datos</h1>
+        <table id="table1">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Telefono</th>
+                    <th>T.D</th>
+                    <th>N° Documento</th>
+                    <th>Correo</th>
+                    <th>Fecha"N/a</th>
+                    <th>Genero</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <button type="button" style="color: black;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Ingresar Datos
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">"portafolio"</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarfilas()"></button>
+                </div>
+
+
+
+
+                <div id="contenedor">
+                    <div id="contenedor2">
+                        <h2>Formulario</h2>
+                        <input type="text" placeholder="Nombre..." id="nombre">
+                        <input type="text" placeholder="Apellidos..." id="apellidos">
+                        <input type="text" placeholder="Telefono..." id="telefono">
+                        <select name="Tipo de Documento" id="tipoDocumento">
+                            <option value="Tipo de Documento">Tipo de Documento...</option>
+                            <option value="Nit">Nit</option>
+                            <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                            <option value="Cedula de ciudadania">Cedula de Ciudadania</option>
+                            <option value="Cedula de extranjeria">Cedula de Extranjeria</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                        </select>
+                        <input type="text" placeholder="N° documento..." id="documento">
+                        <input type="text" placeholder="Correo..." id="correo">
+                        <h2 id="fecha">Fecha de Nacimiento</h2>
+                        <input type="date" placeholder="Fecha de Nacimiento" id="fechan">
+                        <div id="botones">
+                            <h2 id="fecha1">Genero</h2>
+                            <button id="boton1"><img class="m" src="./img/man_FILL0_wght400_GRAD0_opsz24.png"
+                                    alt=""></button>
+                            <input type="radio" id="g1" name="genero" value="Masculino" required>
+                            <button id="boton2"><img class="f" src="./img/woman_FILL0_wght400_GRAD0_opsz24.png"
+                                    alt=""></button>
+                            <input type="radio" id="g2" name="genero" value="Femenino" required>
+                            <button id="enviar" onclick="enviar()">Enviar<img class="e"
+                                    src="./img/rocket_launch_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
+                        </div>
+                    </div>
+
+
+
+                </div> <br>
+
+</body>
+<script>
+    let data = [];
+
+    function enviar() {
+        let nombre = document.getElementById("nombre").value;
+        let apellidos = document.getElementById("apellidos").value;
+        let telefono = document.getElementById("telefono").value;
+        let tipoDocumento = document.getElementById("tipoDocumento").value;
+        let numeroDocumento = document.getElementById("documento").value;
+        let correo = document.getElementById("correo").value;
+        let fechaNacimiento = document.getElementById("fechan").value;
+        let genero;
+        if (document.getElementById("g1").checked) {
+            genero = document.getElementById("g1").value;
+        } else if (document.getElementById("g2").checked) {
+            genero = document.getElementById("g2").value;
+        }
+
+        console.log("Nombre: " + nombre);
+        console.log("Apellidos: " + apellidos);
+        console.log("Teléfono: " + telefono);
+        console.log("Tipo de documento: " + tipoDocumento);
+        console.log("Número de documento: " + numeroDocumento);
+        console.log("Correo: " + correo);
+        console.log("Fecha de nacimiento: " + fechaNacimiento);
+        console.log("Género: " + genero);
+
+        let nuevoItem = {
+            nombre: nombre,
+            apellidos: apellidos,
+            telefono: telefono,
+            tipoDocumento: tipoDocumento,
+            numeroDocumento: numeroDocumento,
+            correo: correo,
+            fechaNacimiento: fechaNacimiento,
+            genero: genero,
+        };
+
+        data.push(nuevoItem);
+
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellidos").value = "";
+        document.getElementById("telefono").value = "";
+        document.getElementById("tipoDocumento").value = "Tipo de Documento";
+        document.getElementById("documento").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("fechan").value = "";
+        document.getElementById("g1").checked = false;
+        document.getElementById("g2").checked = false;
+
+        pintar();
+    }
+    function pintar() {
+        let tabla = document.getElementById('table1').getElementsByTagName('tbody')[0];
+        tabla.innerHTML = "";
+
+        data.forEach((item, i) => {
+            let fila = tabla.insertRow();
+            fila.insertCell(0).textContent = item.nombre;
+            fila.insertCell(1).textContent = item.apellidos;
+            fila.insertCell(2).textContent = item.telefono;
+            fila.insertCell(3).textContent = item.tipoDocumento;
+            fila.insertCell(4).textContent = item.numeroDocumento;
+            fila.insertCell(5).textContent = item.correo;
+            fila.insertCell(6).textContent = item.fechaNacimiento;
+            fila.insertCell(7).textContent = item.genero;
+
+            let eliminar = document.createElement("button");
+            eliminar.textContent = "✕";
+            eliminar.addEventListener("click", () => {
+                eliminarFila(i);
+            });
+
+            let editar = document.createElement("button");
+            editar.textContent = "🖊️";
+            editar.addEventListener("click", () => {
+                editarFila(i);
+                abrirModal()
+            });
+
+            let celda = fila.insertCell(8);
+            celda.appendChild(eliminar);
+            celda.appendChild(editar);
+        });
+    }
+
+
+
+
+    function eliminarFila(index) {
+        data.splice(index, 1);
+        pintar();
+    }
+    function abrirModal() {
+        let modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        modal.show();
+    }
+    function limpiarfilas() {
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellidos").value = "";
+        document.getElementById("telefono").value = "";
+        document.getElementById("tipoDocumento").value = "Tipo de Documento";
+        document.getElementById("documento").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("fechan").value = "";
+        document.getElementById("g1").checked = false;
+        document.getElementById("g2").checked = false;
+    }
+    function editarFila(index) {
+        let item = data[index];
+
+        document.getElementById("nombre").value = item.nombre;
+        document.getElementById("apellidos").value = item.apellidos;
+        document.getElementById("telefono").value = item.telefono;
+        document.getElementById("tipoDocumento").value = item.tipoDocumento;
+        document.getElementById("documento").value = item.numeroDocumento;
+        document.getElementById("correo").value = item.correo;
+        document.getElementById("fechan").value = item.fechaNacimiento;
+
+        if (item.genero === "Masculino") {
+            document.getElementById("g1").checked = true;
+        } else if (item.genero === "Femenino") {
+            document.getElementById("g2").checked = true;
+        }
+        data.splice(index, 1);
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+</html>

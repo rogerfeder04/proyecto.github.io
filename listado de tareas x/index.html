@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="tabla.css">
+</head>
+
+<body>
+    <div id="contenedor_tabla">
+        <h1>Tabla listado de tareas</h1>
+        <input type="text" id="tarea" placeholder="Ingresa tarea a realizar...">
+        <input type="date" id="fecha" name="fecha" min="2024-02-03" max="2024-12-31">
+        <input type="checkbox" id="check" value="first_checkbox" />
+        <button id="agregar">+ Agregar</button>
+        <button id="ordenar">Ordenar</button>
+    </div>
+    <div>
+        <table id="tabla">
+            <thead>
+                <tr>
+                    <th>Tarea</th>
+                    <th>Fecha</th>
+                    <th>Prioridad</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!-- Cuerpo de la tabla -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let agregarBtn = document.getElementById('agregar');
+            let tareaInput = document.getElementById('tarea');
+            let fechaInput = document.getElementById('fecha');
+            let aceptadoCheckbox = document.getElementById('check');
+            let tablaBody = document.querySelector('#tabla tbody');
+            let ordenarBtn = document.getElementById('ordenar');
+             // Para alternar entre orden ascendente y descendente
+             let ascendente = true;
+            agregarBtn.addEventListener('click', function () {
+                let tarea = tareaInput.value;
+                let fecha = fechaInput.value;
+                let prioridad = aceptadoCheckbox.checked ? 'alta' : 'baja';
+
+                let fila = tablaBody.insertRow(tablaBody.rows.length);
+                let celdaTarea = fila.insertCell(0);
+                let celdaFecha = fila.insertCell(1);
+                let celdaPrioridad = fila.insertCell(2);
+
+                celdaTarea.textContent = tarea;
+                celdaFecha.textContent = fecha;
+                celdaPrioridad.textContent = prioridad;
+
+                let botonEliminar = document.createElement('button');
+                botonEliminar.textContent = '❌';
+                botonEliminar.addEventListener('click', function () {
+                    fila.remove();
+                });
+
+                celdaPrioridad.appendChild(botonEliminar);
+
+                tareaInput.value = '';
+                fechaInput.value = '';
+                aceptadoCheckbox.checked = false;
+            });
+            ordenarBtn.addEventListener('click', function () {
+                let filas = Array.from(tablaBody.rows);
+
+                filas.sort(function (filaA, filaB) {
+                    let prioridadA = filaA.cells[2].textContent;
+                    let prioridadB = filaB.cells[2].textContent;
+
+                    if (ascendente) {
+                        return prioridadA.localeCompare(prioridadB);
+                    } else {
+                        return prioridadB.localeCompare(prioridadA);
+                    }
+                });
+
+                // Mueve las filas ordenadas dentro del cuerpo de la tabla
+                filas.forEach(function (fila) {
+                    tablaBody.appendChild(fila);
+                });
+                // Cambia la dirección de ordenamiento
+                ascendente = !ascendente;
+            });
+        });
+    </script>
+</body>
+
+</html>
+
