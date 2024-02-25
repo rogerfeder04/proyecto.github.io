@@ -1,0 +1,101 @@
+.cajaf{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    z-index: 100000;
+  }
+  .cajaf:hover{
+    height: 180px;
+  }
+  .cajaf:hover .caja1{
+    visibility: visible;
+    bottom: 60px;
+  }
+  .cajaf:hover .caja2{
+    visibility: visible;
+    bottom: 120px;
+  }
+  .caja2:hover:before{
+    visibility: visible;
+    color:#000;
+  }
+  .caja1:hover:before{
+    visibility: visible; 
+    color:#000;
+  }
+  .btn_roundf{
+    position: absolute;
+    bottom:0 ;
+    right: 0;
+    border:1px solid #330000;
+    background: #330000;
+    color:#ffff00;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    z-index: 90090; 
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    
+  }
+  .caja1::before{
+    content: "Imprimir Comprobante";
+    background: #ffd600;
+    border:1px solid #ffd600;
+    position: absolute;
+    left: -140px; 
+    padding: .5em;
+    visibility: hidden;
+  }
+  .caja2::before{
+    content: "Imprimir Contrato";
+    background: #283593;
+    border:1px solid #283593;
+    position: absolute;
+    left: -110px; 
+    padding: .5em;
+    visibility: hidden;
+  }
+  .caja1{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border:1px solid #ffd600;
+    background: #ffd600;
+    color: #fff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    z-index: 90080; 
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    -webkit-transition: all .5s;
+    visibility: hidden;
+  }
+  .caja2{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border:1px solid #283593;
+    background: #283593;
+    color:#fff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    z-index: 9070; 
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    visibility: hidden;
+    -webkit-transition: all 1s;
+  }

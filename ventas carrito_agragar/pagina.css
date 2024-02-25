@@ -3,56 +3,77 @@
 /* cuerpo de la pagina */
 
 body {
-    font-family: Arial, sans-serif;
     box-sizing: border-box;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
 }
 
 header {
-    background-color: #f1f1f1;
-    padding: 20px;
+    background-color: #333;
+    padding: 4px;
     text-align: center;
 }
 
-.banner {
+.banner {.banner {
     background-color: #333;
     color: white;
+    width: 100%;
+    height: 100vh; /* Cubre toda la altura de la pantalla */
+    background-size: cover;
+    position: fixed; /* Se queda fijo en la ventana del navegador */
+    top: 0; /* Se mantiene en la parte superior */
+    left: 0; /* Se mantiene al inicio horizontal */
 }
-
-#contenedor {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
+p{
+    color: white;
 }
-
-.info {
-    text-align: center;
 }
-
-.precio {
-    font-weight: bold;
-    color: #f1f1f1;
-    background-color: #333;
-    padding: 5px;
-    margin: 10px;
+.banner .fondo{
+/* object-fit: cover;
+background-size: cover; */
+width: 100%;
+height: 200px;
 }
-
 .añadir {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
+    background-color: #333; /* Color oscuro que combina bien con azul claro */
+    color: white; /* Texto en color blanco para crear contraste */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    font-size: 16px; /* Tamaño de la fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    border-radius: 5px; /* Añade bordes redondeados */
 }
-
-.añadir:hover {
-    background-color: #555;
+#itemsList img {
+    width: 50px; /* Ancho deseado para las imágenes */
+    height: auto; /* Altura automática para mantener la proporción */
+    margin-right: 2px; /* Espacio entre las imágenes */
 }
-#imagen img {
-    width: 200px;
-    height: auto; 
+#contenedor{
+    position:fixed;
+}
+#container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+    text-align: center;
+    justify-content: center;   
+    background-color: #6f8792;
+  padding: 10px;
+}
+#container .item{
+    text-align: center;
+    padding: 20px;
+}
+.imagen {
+    width: 250px;
+    height: 200px; 
     align-items: center;
+    border-radius: 12px;
+}
+.item .titulo{
+    display: flex;
+font-size: 20px;
+justify-content: space-around;
 }
 /* parte carrito */
 .btn-cart {
@@ -81,8 +102,55 @@ header {
     margin-right: 10px;
   }
 
-  .item-image{
+  .itemsList .imagen{
     width: 50px;
     height: 50px;
   }
-  
+
+  .item{
+   border: solid 1px #333;
+   border-radius: 10px;
+  }
+   /* seccion footer */
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+}
+
+.footer p {
+    margin-bottom: 0;
+    text-align: center;
+}
+.btn-show-info {
+position: fixed;
+top: 45px;}
+/* Media query para dispositivos pequeños */
+@media (max-width: 768px) {
+    .footer .container {
+        text-align: center;
+    }
+    .footer .row {
+        display: flex;
+        flex-direction: column;
+    }
+    .footer .row > div {
+        margin-bottom: 15px;
+    }
+    .social-icons {
+        margin-top: 15px;
+    }
+}
+  /* @media (max-width: 768px) {
+    .info h2 {
+        font-size: 18px;
+    }
+
+    .info p {
+        font-size: 14px;
+    }
+
+    .info .añadir {
+        margin-top: 10px;
+    }
+} */
