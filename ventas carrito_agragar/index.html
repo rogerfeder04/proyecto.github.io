@@ -1,265 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    
-     <meta charset="UTF-8">    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="pagina.css">
-    <link rel="stylesheet" href="@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');">
-</head>
-<body>
-    <header>
-        <div class="banner">
-            <p>ILUMINANDO SUEÑOS CON LA MEJOR CALIDAD</p>
-            <p>🛡️</p>
-            <img class="fondo" src="./imagenes/ELCTRICICDA.jpg" alt="">
-           
-        </div>   
-        <div id="contenedor">
-            
-            <div id="carro" onmouseover="mostrarCarrito()" onmouseout="ocultarCarrito()">
-               
-                <button class="btn-show-info">🛻 Compras
-                    <div id="itemsList" style="display: none;"></div>
-                   
-                </button>
-               
-            </div>
-        </div>
-        
-             
-      
-    </header>
- <section id="container">
-
- </section>
-
- <footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-left">
-                <p>© Material eléctrico. Tienda de eléctricidad online.</p>
-            </div>
-        </div>
-    </div>
-    
-</footer>
-    <script>
-    
-
-        let productos = [
-    {
-        imagen:"./imagenes/led.jpg",
-        nombre:" Panel Led 18w ",
-        precio: 12000 ,        
-        descripcion:"Incrustar Luz Blanca"
-
-    },
-    {
-        imagen:"./imagenes/lamparas.jpg",
-        nombre:"Lampara Led 36w",
-        precio:  17000,
-        descripcion:"Sobreponer Antipolvo"
-    },
-    {
-        imagen:"./imagenes/cuadrada.jpg",
-        nombre:"Led Panel Rectangular ",
-        precio:120000,
-        descripcion:"  30x120 Cm 40w Luz Blanca"
-    },
-    {
-        imagen:"./imagenes/bombillo.jpg",
-        nombre:"Bulbo LED Filamento 6W ",
-    precio: 18000,
-    descripcion:" Dimerizable Luz Amarilla E27"
-    },
-    {
-    imagen:"./imagenes/ojo2.jpg",
-    nombre:"Bombillo Led Spot ",
-        precio:28000,
-    descripcion:"Inteligente 5W CCT ZM"
-    },
-    {
-        imagen:"./imagenes/mecha.jpg",
-        nombre:"Bombillos Vela 4w ",
-        precio : 650000,
-        descripcion:"E27 2700k Set X 100 Unidades"
-    },
-    {
-        imagen:"./imagenes/tortuge.jpg",
-        nombre:"Aplique LED Tortuga 20w ",
-        precio:33000,
-        descripcion:"Negro Luz Fría Set"
-    },
-    {
-    imagen:"./imagenes/sensor.jpg",
-    nombre:"Sensor De Movimiento ",
-    precio:23000,
-    descripcion:" Techo 360 Grados"
-    },
-    {
-        imagen:"./imagenes/toma.jpg",
-        nombre:"Tomacorriente Fija Doble",
-        precio:112000,
-        descripcion:" Vta+ Smart Home Color Blanco"
-    },
-    {
-        imagen:"./imagenes/inteli.jpg",
-        nombre:"Enchufe Inteligente Toma Wifi",
-        precio:40000,
-        descripcion:" Smart Google Assistant Y Alexa"
-    },
-    
-    {
-        imagen:"./imagenes/tacos.jpg",
-        nombre:"Mini-breaker *2",
-        precio:40000,
-        descripcion:" 20amp,(tipo Riel)"
-    },
-    {
-        imagen:"./imagenes/medidor.jpg",
-        nombre:"Medidor de energia ",
-        precio:80000,
-        descripcion:"Bifasico,conexion asimetrica"
-    },
-]
-
-document.addEventListener("DOMContentLoaded",()=>{
-    pintarProductos();
-    mostrarCarrito(); // Mostrar el carrito al cargar la página
-})
-
-function pintarProductos(){
-    productos.forEach((item,index)=>{
-        let div = document.createElement("div");
-        div.classList = "item";
-
-        let imagen = document.createElement("img");
-        imagen.src = item.imagen;
-        imagen.classList = "imagen";
-        div.appendChild(imagen);
-
-        let nombre = document.createElement("span");
-        nombre.textContent = item.nombre;
-        nombre.classList = "titulo";
-        div.appendChild(nombre);        
-        
-        let precio = document.createElement("span");
-        precio.textContent = item.precio;
-        precio.classList = "titulo";
-        // precio.textContent ="$";
-        div.appendChild(precio);
-// let price=document.createElement(p);
-// price.textContent=item.price;
-// price.classList="price";
-// div.appendChild(price)
-
-        let descripcion = document.createElement("span");
-        descripcion.textContent = item.descripcion;
-        descripcion.classList = "titulo";
-        div.appendChild(descripcion);
-        
-        let boton = document.createElement("button");
-        boton.classList = "añadir";
-        boton.textContent = "Comprar";
-        div.appendChild(boton);
-
-        document.getElementById("container").appendChild(div);
-
-        boton.addEventListener("click", () => {
-            agregarAlCarrito(item);
-            mostrarCarrito();
-        });
-    });
-}
-
-const carrito = [];
-
-// Función para agregar ítem al carrito
-function agregarAlCarrito(item) {
-    carrito.push(item);
-    mostrarCarrito();
-}
-
-// Función para eliminar ítem del carrito
-function eliminarItem(index) {
-    carrito.splice(index, 1); // Eliminar el elemento del carrito
-    mostrarCarrito(); // Mostrar el carrito actualizado después de eliminar el ítem
-}
-
-// Función para mostrar el carrito
-// Función para mostrar el carrito
-function mostrarCarrito() {
-    const itemsList = document.getElementById("itemsList");
-    itemsList.innerHTML = ""; // Limpiar el contenido anterior
-
-    let totalPrecio = 0; // Variable para almacenar el total de precios
-
-    carrito.forEach((item, index) => {
-        const itemElement = document.createElement("div");
-
-        // Crear imagen
-        const imagen = document.createElement("img");
-        imagen.src = item.imagen;
-        imagen.alt = item.nombre;
-        itemElement.appendChild(imagen);
-
-        // Crear nombre
-        const nombre = document.createElement("p");
-        nombre.textContent = item.nombre;
-        itemElement.appendChild(nombre);
-
-        // Crear precio
-        const precio = document.createElement("p");
-        precio.textContent = item.precio;
-        itemElement.appendChild(precio);
-
-        totalPrecio += item.precio; // Sumar el precio al total
-
-        // Crear descripción
-        const descripcion = document.createElement("p");
-        descripcion.textContent = item.descripcion;
-        itemElement.appendChild(descripcion);
-
-        // Crear botón eliminar
-        const btnEliminar = document.createElement("button");
-        btnEliminar.textContent = "❌";
-        btnEliminar.addEventListener("click", () => {
-            eliminarItem(item, itemElement); 
-            // Llamar a la función eliminarItem pasando el ítem y el elemento del carrito
-        });
-        itemElement.appendChild(btnEliminar);
-
-        itemsList.appendChild(itemElement);
-    });
-
-    // Mostrar el total al final de la lista
-    const totalElement = document.createElement("p");
-    totalElement.textContent = "Total: " + totalPrecio;
-    itemsList.appendChild(totalElement);
-
-    itemsList.style.display = "block"; // Mostrar el carrito
-}
-
-// Función para eliminar un ítem específico del carrito
-function eliminarItem(item, itemElement) {
-    const index = carrito.indexOf(item); 
-    if (index !== -1) {
-        carrito.splice(index, 1); 
-        itemElement.remove(); // Eliminar el elemento del carrito del DOM
-    }
-}
-
-
-// Función para ocultar el carrito
-function ocultarCarrito() {
-    const itemsList = document.getElementById("itemsList");
-    itemsList.style.display = "none"; // Ocultar el carrito
-}
-
-</script> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -276,15 +14,18 @@ function ocultarCarrito() {
             <p>🛡️</p>
             <img class="fondo" src="./imagenes/bannertres.jpg" alt="">
         </div>   
-        <div id="contenedor">
+      <!-- parte  __SERVICIOS___  -->
+       
             <div id="carro" onmouseover="mostrarCarrito()" onmouseout="ocultarCarrito()">
-                <button class="btn-show-info">🛻 Compras
-                    <div id="itemsList" style="display: none;"></div>
-                </button>
+                <button class="btn-show-info">🛻 
+                    <div id="itemsList" style="display: none;"> </div>
+    
             </div>
-        </div>
     </header>
-    <section id="container"></section>
+    
+   
+    <section id="container">   
+    </section>
     <footer class="footer">
         <div class="container">
             <div class="row">
@@ -294,6 +35,7 @@ function ocultarCarrito() {
             </div>
         </div>
     </footer>
+ 
     <script>
         let productos = [
     {
@@ -312,7 +54,7 @@ function ocultarCarrito() {
     {
         imagen:"./imagenes/cuadrada.jpg",
         nombre:"Led Panel Rectangular ",
-        precio:120000,
+        precio:12000,
         descripcion:"  30x120 Cm 40w Luz Blanca"
     },
     {
@@ -348,7 +90,7 @@ function ocultarCarrito() {
     {
         imagen:"./imagenes/toma.jpg",
         nombre:"Tomacorriente Fija Doble",
-        precio:112000,
+        precio:11200,
         descripcion:" Vta+ Smart Home Color Blanco"
     },
     {
@@ -433,78 +175,65 @@ function ocultarCarrito() {
             mostrarCarrito();
         }
 
-        // Función para eliminar ítem del carrito
-        function eliminarItem(item) {
-    const index = carrito.indexOf(item); // Encontrar el índice del item en el carrito
-    if (index !== -1) {
-        carrito.splice(index, 1); // Eliminar el elemento del carrito
-        mostrarCarrito(); // Mostrar el carrito actualizado después de eliminar el ítem
-    }
+
+
+
+// Función para mostrar el carrito
+function mostrarCarrito() {
+    const itemsList = document.getElementById("itemsList");
+    itemsList.innerHTML = "";
+    let totalPrecio = 0; 
+
+    carrito.forEach((item, index) => {
+        const itemElement = document.createElement("div");
+
+        // Crear imagen
+        const imagen = document.createElement("img");
+        imagen.src = item.imagen;
+        imagen.alt = item.nombre;
+        itemElement.appendChild(imagen);
+
+        // Crear nombre
+        const nombre = document.createElement("p");
+        nombre.textContent = item.nombre;
+        itemElement.appendChild(nombre);
+
+        // Crear precio
+        const precio = document.createElement("p");
+        precio.textContent ="$" + item.precio;
+        itemElement.appendChild(precio);
+
+        totalPrecio += item.precio * item.cantidad; // Sumar el precio al total
+
+        // Crear cantidad
+        const cantidad = document.createElement("p");
+        cantidad.textContent = "Cantidad: " + item.cantidad;
+        itemElement.appendChild(cantidad);
+
+        // Crear descripción
+        const descripcion = document.createElement("p");
+        descripcion.textContent = item.descripcion;
+        itemElement.appendChild(descripcion);
+
+        // Crear botón eliminar
+        const btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "Eliminar";
+        btnEliminar.dataset.index = index; // Asociar el índice como un atributo de datos
+        btnEliminar.addEventListener("click", () => {
+            eliminarItem(btnEliminar.dataset.index); // Recuperar el índice del atributo de datos
+        });
+        itemElement.appendChild(btnEliminar);
+
+        itemsList.appendChild(itemElement);
+    });
+
+    // Mostrar el total al final de la lista
+    const totalElement = document.createElement("p");
+    totalElement.textContent = "Total: $" + totalPrecio;
+    itemsList.appendChild(totalElement);
+    itemsList.style.display = "block"; // Mostrar el carrito
 }
-        // Función para mostrar el carrito
-        function mostrarCarrito() {
-            const itemsList = document.getElementById("itemsList");
-            itemsList.innerHTML = "";
-             // Limpiar el contenido anterior
 
-            let totalPrecio = 0; 
-
-            carrito.forEach((item, index) => {
-                const itemElement = document.createElement("div");
-
-                // Crear imagen
-                const imagen = document.createElement("img");
-                imagen.src = item.imagen;
-                imagen.alt = item.nombre;
-                itemElement.appendChild(imagen);
-
-                // Crear nombre
-                const nombre = document.createElement("p");
-                nombre.textContent = item.nombre;
-                itemElement.appendChild(nombre);
-
-                // Crear precio
-                const precio = document.createElement("p");
-                precio.textContent ="$" + item.precio;
-                itemElement.appendChild(precio);
-
-                totalPrecio += item.precio * item.cantidad; // Sumar el precio al total
-
-                // Crear cantidad
-                const cantidad = document.createElement("p");
-                cantidad.textContent = "Cantidad: " + item.cantidad;
-                itemElement.appendChild(cantidad);
-
-                // Crear descripción
-                const descripcion = document.createElement("p");
-                descripcion.textContent = item.descripcion;
-                itemElement.appendChild(descripcion);
-
-                // Crear botón eliminar
-                const btnEliminar = document.createElement("button");
-                btnEliminar.textContent = "❌";
-                btnEliminar.addEventListener("click", () => {
-                    eliminarItem(index); 
-                    // Llamar a la función eliminarItem pasando el índice del ítem
-                });
-                itemElement.appendChild(btnEliminar);
-
-                itemsList.appendChild(itemElement);
-            });
-
-            // Mostrar el total al final de la lista
-            const totalElement = document.createElement("p");
-            totalElement.textContent = "Total: " + totalPrecio;
-            itemsList.appendChild(totalElement);
-
-            itemsList.style.display = "block"; // Mostrar el carrito
-        }
-
-        // Función para ocultar el carrito
-        function ocultarCarrito() {
-            const itemsList = document.getElementById("itemsList");
-            itemsList.style.display = "none"; // Ocultar el carrito
-        }
-    </script>
+</script>
 </body>
 </html>
