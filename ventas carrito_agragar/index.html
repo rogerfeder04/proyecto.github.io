@@ -165,20 +165,20 @@
         }
 
         // Función para agregar ítem al carrito
-        function agregarAlCarrito(item) {
-    let producto = false;
+function agregarAlCarrito(item) {
+    let encontrado = false;
     carrito.forEach((producto) => {
         if (producto.nombre === item.nombre) {
             producto.cantidad++;
-            producto = true;
+            encontrado = true;
         }
     });
-    if (!producto) {
+    if (!encontrado) {
         item.cantidad = 1;
         carrito.push(item);
     }
 
-    console.log(carrito); // Agregar esto para verificar el estado del carrito
+    console.log(carrito);
     mostrarCarrito();
     actualizarCantidadCarrito(); // Llamar a la función para actualizar la cantidad en el carrito
 }
