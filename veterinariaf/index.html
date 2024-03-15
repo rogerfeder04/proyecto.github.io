@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </a>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="veterinariaf.css">
+    <title>Formulario mascotas</title>
+
+</head>
+
+<body>
+
+
+    <div id="tabla">
+        <button type="button" style="color: black;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Ingresar Datos mascota
+            </button>
+            <div id="contenedor-tarjetas"></div>
+              
+              <template id="card-template">
+                <div class="card" style="width: 18rem;">
+                  <img src="" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Nombre mascota</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Tipo de mascota</h6>
+                    <p class="card-text">Nombre dueño</p>
+                    <p class="card-text">Telefono</p>
+                    <p class="card-text">N° Documento</p>
+                    <p class="card-text">Correo</p>
+                    <p class="card-text">Fecha cita</p>
+                    <p class="card-text">Genero</p>
+                    <button class="btn btn-primary">Opciones</button>
+                  </div>
+                </div>
+              </template>
+    </div>
+   
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            <div id="contenedor2"> formulario Mascota
+                                <input type="text" placeholder="Nombre_Mascota" id="nombre">
+                                <select name="Tipo de mascota" id="tipoMascota" onchange="mostrarImagen()">
+                                    <option value="" selected disabled>Tipo de mascota...</option>
+                                    <option value="ave">Ave</option>
+                                    <option value="perro">Perro</option>
+                                    <option value="gato">Gato</option>
+                                    <option value="reptil">Reptil</option>
+                                </select>
+                                <input type="text" placeholder="Nombre_dueño..." id="nombredueño">
+                                <input type="text" placeholder="Telefono..." id="telefono">
+                                
+                                <input type="text" placeholder="N° documento..." id="documento">
+                                <input type="text" placeholder="Correo..." id="correo">
+                                <h3 id="fecha">Fecha proxima cita</h3>
+                                <input type="date" placeholder="Fecha proxima cita" id="fechacita">
+                                <div id="botones">
+                                    <h3 id="fecha1">Genero</h3>
+                                    <button id="boton1"><img class="m" src="./imagen/masculino.png"
+                                            alt=""></button>
+                                    <input type="radio" id="g1" name="genero" value="Macho" required>
+                                    <button id="boton2"><img class="m" src="./imagen/femenino.png"
+                                            alt=""></button>
+                                    <input type="radio" id="g2" name="genero" value="Hembra" required>
+                                    <button id="enviar" onclick="enviar()">Enviar<img class="e"
+                                            src="./img/rocket_launch_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
+                                </div>
+                        </div>  
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarfilas()"></button>
+            </div>
+            </div>
+            </div>
+            </div>
+
+<script>
+    let data = [];
+
+    let indiceEditando = null;
+
+function enviar() {
+    let nombre = document.getElementById("nombre").value;
+    let tipoMascota = document.getElementById("tipoMascota").value;
+    if (tipoMascota === "") {
+        // Mostrar una alerta indicando que se debe seleccionar un tipo de mascota
+        alert("Por favor, seleccione un tipo de mascota.");
+        return; 
+    }
+    let nombredueño = document.getElementById("nombredueño").value;
+    let telefono = document.getElementById("telefono").value;
+    let documento = document.getElementById("documento").value;
+    let correo = document.getElementById("correo").value;
+    let fechacita = document.getElementById("fechacita").value;
+    
+    let genero;
+    if (document.getElementById("g1").checked) {
+        genero = document.getElementById("g1").value;
+    } else if (document.getElementById("g2").checked) {
+        genero = document.getElementById("g2").value;
+    }
+
+    if (indiceEditando !== null) {
+        // Si se está editando un elemento existente, actualizarlo en lugar de agregar uno nuevo
+        data[indiceEditando] = {
+            nombre: nombre,
+            tipoMascota: tipoMascota,
+            nombredueño: nombredueño,
+            telefono: telefono,
+            documento: documento,
+            correo: correo,
+            fechacita: fechacita,
+            genero: genero
+        };
+        // Limpiar el índice de edición
+        indiceEditando = null;
+    } else {
+        // Si no se está editando, agregar un nuevo elemento a data
+        let nuevoItem = {
+            nombre: nombre,
+            tipoMascota: tipoMascota,
+            nombredueño: nombredueño,
+            telefono: telefono,
+            documento: documento,
+            correo: correo,
+            fechacita: fechacita,          
+            genero: genero,
+        };
+        data.push(nuevoItem);
+    }
+    
+    pintarTarjetas(); // Pintar las tarjetas actualizadas
+    limpiarFormulario(); // Limpiar el formulario después de enviar
+}
+function limpiarFormulario() {
+    document.getElementById("nombre").value = "";
+    document.getElementById("tipoMascota").value = "";
+    document.getElementById("nombredueño").value = "";
+    document.getElementById("telefono").value = "";
+    document.getElementById("documento").value = "";
+    document.getElementById("correo").value = "";
+    document.getElementById("fechacita").value = "";
+    document.getElementById("g1").checked = false;
+    document.getElementById("g2").checked = false;
+}
+
+function pintarTarjetas() {
+    let contenedorTarjetas = document.getElementById('contenedor-tarjetas');
+    contenedorTarjetas.innerHTML = ""; // Limpiar el contenedor antes de pintar las tarjetas nuevamente
+
+    data.forEach((item, i) => {
+        let tarjeta = document.createElement('div');
+        tarjeta.classList.add('tarjeta');
+
+   
+
+        let tipoMascota = document.createElement('p');
+        tipoMascota.textContent = ` ${item.tipoMascota}`;
+        tarjeta.appendChild(tipoMascota);
+
+        let imagenCelda = document.createElement('img');
+        imagenCelda.src = obtenerImagen(item.tipoMascota);
+        imagenCelda.classList.add("fotos");
+        tarjeta.appendChild(imagenCelda);
+
+        let nombre = document.createElement('p');
+        nombre.textContent = `Nombre mascota: ${item.nombre}`;
+        tarjeta.appendChild(nombre);
+
+        let nombredueño = document.createElement('p');
+        nombredueño.textContent = `Nombre dueño: ${item.nombredueño}`;
+        tarjeta.appendChild(nombredueño);
+
+        let documento = document.createElement('p');
+        documento.textContent = `N° documento: ${item.documento}`;
+        tarjeta.appendChild(documento);
+        
+        let telefono = document.createElement('p');
+        telefono.textContent = `Teléfono: ${item.telefono}`;
+        tarjeta.appendChild(telefono);
+
+
+    let correo = document.createElement('p');
+    correo.textContent = `Correo: ${item.correo}`;
+    tarjeta.appendChild(correo);
+
+    let fechacita = document.createElement('p');
+    fechacita.textContent = `Fecha cita: ${item.fechacita}`;
+    tarjeta.appendChild(fechacita);
+
+    let genero = document.createElement('p');
+    genero.textContent = `Género: ${item.genero}`;
+    tarjeta.appendChild(genero);
+
+ 
+
+    let eliminar = document.createElement("button");
+    eliminar.textContent = "✕";
+    eliminar.classList.add("elimina")
+    eliminar.addEventListener("click", () => {
+      eliminarElemento(i);
+      pintarTarjetas();
+    });
+
+    tarjeta.appendChild(eliminar);
+
+    let editar = document.createElement("button");
+    editar.textContent = "✍️";
+    editar.classList.add("edita");
+    editar.addEventListener("click", () => {
+    editarElemento(item, i);
+    abrirModal();
+});
+    tarjeta.appendChild(editar);
+
+    contenedorTarjetas.appendChild(tarjeta);
+  });
+}
+function abrirModal() {
+        let modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        modal.show();
+    }
+
+
+    function editarElemento(item, i) {
+    // Rellenar el formulario del modal con los datos del elemento a editar
+    document.getElementById("nombre").value = item.nombre;
+    document.getElementById("tipoMascota").value = item.tipoMascota;
+    document.getElementById("nombredueño").value = item.nombredueño;
+    document.getElementById("telefono").value = item.telefono;
+    document.getElementById("documento").value = item.documento;
+    document.getElementById("correo").value = item.correo;
+    document.getElementById("fechacita").value = item.fechacita;
+    document.getElementById("g1").checked = item.genero === "Macho";
+    document.getElementById("g2").checked = item.genero === "Hembra";
+    // Establecer el índiceEditando
+    indiceEditando = i;
+}
+function enviarModal() {
+    // Obtener los datos actualizados del formulario del modal
+    let nombre = document.getElementById("nombre").value;
+    let tipoMascota = document.getElementById("tipoMascota").value;
+    let nombredueño = document.getElementById("nombredueño").value;
+    let telefono = document.getElementById("telefono").value;
+    let documento = document.getElementById("documento").value;
+    let correo = document.getElementById("correo").value;
+    let fechacita = document.getElementById("fechacita").value;
+    let genero = document.getElementById("g1").checked ? "Macho" : "Hembra";
+
+    // Crear el objeto del ítem editado
+    let itemEditado = {
+        nombre: nombre,
+        tipoMascota: tipoMascota,
+        nombredueño: nombredueño,
+        telefono: telefono,
+        documento: documento,
+        correo: correo,
+        fechacita: fechacita,
+        genero: genero
+    };
+
+    // Reemplazar el ítem original en el array data con el ítem editado
+    data[indiceEditando] = itemEditado;
+
+    // Limpiar el formulario y cerrar el modal
+    limpiarFormulario();
+    cerrarModal();
+    // Volver a pintar las tarjetas
+    pintarTarjetas();
+}
+
+
+function obtenerImagen(tipoMascota) {
+    // Retorna la URL de la imagen según el tipo de mascota
+    switch (tipoMascota) {
+        case "ave":
+            return "./imagen/condor.jpeg";
+        case "perro":
+            return "./imagen/perro.jpeg";
+        case "gato":
+            return "./imagen/gatoss.jpeg";
+        case "reptil":
+            return "./imagen/reptil.jpeg";
+        default:
+            return ""; 
+    }
+}
+// Función para mostrar la imagen según la opción seleccionada
+function mostrarImagen() {
+    var select = document.getElementById("tipoMascota");
+    // Si se selecciona una opción distinta a "Tipo de mascota..."
+    if (select.value !== "") {
+        select.classList.add("selected");
+    } else {
+        select.classList.remove("selected");
+    }
+}
+
+function eliminarTarjeta(event) {
+  if (event.target.classList.contains('elimina')) {
+    let indice = event.target.parentNode.getAttribute('data-indice');
+    eliminarElemento(indice);
+    pintarTarjetas();
+  }
+}
+function eliminarElemento(indice) {
+  data.splice(indice, 1);
+}
+
+
+
+// // Llamar a la función para pintar las tarjetas después de cargar el DOM
+// document.addEventListener('DOMContentLoaded', () => {
+//   pintarTarjetas = pintarTarjetas.bind(this);
+//   pintarTarjetas();
+// });
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+</html>

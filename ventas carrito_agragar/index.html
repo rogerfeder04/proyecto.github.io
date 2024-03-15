@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <meta charset="UTF-8">    
+    <meta charset="UTF-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="pagina.css">
@@ -14,16 +14,19 @@
             <p>🛡️</p>
             <img class="fondo" src="./imagenes/bannertres.jpg" alt="">
         </div>   
-      <!-- parte  __SERVICIOS___  -->
-       
-            <div id="carro" onmouseover="mostrarCarrito()" onmouseout="ocultarCarrito()">
-                <button class="btn-show-info">🛻 
-                    <div id="itemsList" style="display: none;"> </div>
+    <!-- parte  __SERVICIOS___  -->
     
+            <div id="carro">
+                <button class="btn-show-info">
+                    <p class="car">🛻
+                    <span id="cantidadCarrito">0</span>
+                    </p>
+                    
+                    <div id="itemsList" style="display: none;"> </div>
             </div>
     </header>
     
-   
+
     <section id="container">   
     </section>
     <footer class="footer">
@@ -35,7 +38,7 @@
             </div>
         </div>
     </footer>
- 
+
     <script>
         let productos = [
     {
@@ -120,6 +123,7 @@
             mostrarCarrito(); // Mostrar el carrito al cargar la página
         })
 
+
         function pintarProductos(){
             productos.forEach((item,index)=>{
                 let div = document.createElement("div");
@@ -136,8 +140,9 @@
                 div.appendChild(nombre);        
 
                 let precio = document.createElement("span");
-                precio.textContent ="$"+ item.precio;
+                precio.textContent ="$"+ item.precio.toLocaleString();
                 precio.classList = "titulo";
+
                 div.appendChild(precio);
 
                 let descripcion = document.createElement("span");
@@ -161,32 +166,49 @@
 
         // Función para agregar ítem al carrito
         function agregarAlCarrito(item) {
-            let found = false;
-            carrito.forEach((producto) => {
-                if (producto.nombre === item.nombre) {
-                    producto.cantidad++;
-                    found = true;
-                }
-            });
-            if (!found) {
-                item.cantidad = 1;
-                carrito.push(item);
-            }
-            mostrarCarrito();
+    let producto = false;
+    carrito.forEach((producto) => {
+        if (producto.nombre === item.nombre) {
+            producto.cantidad++;
+            producto = true;
         }
+    });
+    if (!producto) {
+        item.cantidad = 1;
+        carrito.push(item);
+    }
 
+    console.log(carrito); // Agregar esto para verificar el estado del carrito
+    mostrarCarrito();
+    actualizarCantidadCarrito(); // Llamar a la función para actualizar la cantidad en el carrito
+}
 
+function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
+    console.log(carrito); // Agregar esto para verificar el estado del carrito
+    mostrarCarrito();
+    
+    actualizarCantidadCarrito(); // Llamar a la función para actualizar la cantidad en el carrito
+}
+function actualizarCantidadCarrito() {
+    const cantidadCarrito = document.getElementById("cantidadCarrito");
+    let totalItems = 0;
+    carrito.forEach((item) => {
+        totalItems += item.cantidad;
+    });
+    cantidadCarrito.textContent = totalItems;
+}
 
 
 // Función para mostrar el carrito
 function mostrarCarrito() {
     const itemsList = document.getElementById("itemsList");
     itemsList.innerHTML = "";
-    let totalPrecio = 0; 
+    let totalPrecio = 0;
 
     carrito.forEach((item, index) => {
         const itemElement = document.createElement("div");
-
+        itemElement.classList.add("contenido");
         // Crear imagen
         const imagen = document.createElement("img");
         imagen.src = item.imagen;
@@ -200,7 +222,7 @@ function mostrarCarrito() {
 
         // Crear precio
         const precio = document.createElement("p");
-        precio.textContent ="$" + item.precio;
+        precio.textContent = "$" + item.precio.toLocaleString(); // Formatear el precio con punto como separador de miles
         itemElement.appendChild(precio);
 
         totalPrecio += item.precio * item.cantidad; // Sumar el precio al total
@@ -218,22 +240,35 @@ function mostrarCarrito() {
         // Crear botón eliminar
         const btnEliminar = document.createElement("button");
         btnEliminar.textContent = "Eliminar";
-        btnEliminar.dataset.index = index; // Asociar el índice como un atributo de datos
-        btnEliminar.addEventListener("click", () => {
-            eliminarItem(btnEliminar.dataset.index); // Recuperar el índice del atributo de datos
-        });
+        btnEliminar.classList = "boton";
         itemElement.appendChild(btnEliminar);
-
+        btnEliminar.addEventListener("click", () => {
+        carrito.splice(index, 1);
+        mostrarCarrito();
+        actualizarCantidadCarrito();
+});
         itemsList.appendChild(itemElement);
     });
 
     // Mostrar el total al final de la lista
     const totalElement = document.createElement("p");
-    totalElement.textContent = "Total: $" + totalPrecio;
+    totalElement.textContent = "Total: $" + totalPrecio.toLocaleString(); // Formatear el total con punto como separador de miles
+    totalElement.classList.add("total");
     itemsList.appendChild(totalElement);
-    itemsList.style.display = "block"; // Mostrar el carrito
-}
+    itemsList.style.display = "block"; // Mostrar el carrito 
 
+    
+
+    const btnShowInfo = document.querySelector('.btn-show-info');
+    btnShowInfo.addEventListener("click", () => {
+        itemsList.style.display = "block";
+    });
+
+    // Agregar evento para ocultar el carrito al alejar el mouse
+    itemsList.addEventListener("mouseleave", () => {
+        itemsList.style.display = "none";
+    });
+}
 </script>
 </body>
 </html>

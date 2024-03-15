@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </a>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tablas.css">
+    <title>Formulario mascotas</title>
+
+</head>
+
+<body>
+
+
+    <div id="tabla">
+        <button type="button" style="color: black;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Ingresar Datos mascota
+            </button>
+        <table id="table1">
+            <thead>
+                <tr>
+                    <th>Nombre mascota</th>
+                    <th> T_mascota</th>
+                    <th>Nombre dueño</th>
+                    <th>Telefono</th>
+                    <th>N° Documento</th>
+                    <th>Correo</th>
+                    <th>Fecha cita</th>
+                    <th>Genero</th>
+                    <th>Imagen</th> <!-- Nueva columna para la imagen -->
+                    <th>Opciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+   
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">"portafolio"</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="limpiarfilas()"></button>
+            </div>
+
+
+
+                <div id="contenedor">
+                    <div id="contenedor2">
+                        <h2>Formulario mascota</h2>
+                        <input type="text" placeholder="Nombre..." id="nombre">
+                        <select name="Tipo de mascota" id="tipoMascota" onchange="mostrarImagen()">
+                            <option value="" selected disabled>Tipo de mascota...</option>
+                            <option value="ave">Ave</option>
+                            <option value="perro">Perro</option>
+                            <option value="gato">Gato</option>
+                            <option value="reptil">Reptil</option>
+                        </select>
+                        <input type="text" placeholder="Nombre_dueño..." id="nombredueño">
+                        <input type="text" placeholder="Telefono..." id="telefono">
+                        
+                        <input type="text" placeholder="N° documento..." id="documento">
+                        <input type="text" placeholder="Correo..." id="correo">
+                        <h3 id="fecha">Fecha proxima cita</h3>
+                        <input type="date" placeholder="Fecha proxima cita" id="fechacita">
+                        <div id="botones">
+                            <h3 id="fecha1">Genero</h3>
+                            <button id="boton1"><img class="m" src="./imagen/masculino.png"
+                                    alt=""></button>
+                            <input type="radio" id="g1" name="genero" value="Macho" required>
+                            <button id="boton2"><img class="m" src="./imagen/femenino.png"
+                                    alt=""></button>
+                            <input type="radio" id="g2" name="genero" value="Hembra" required>
+                            <button id="enviar" onclick="enviar()">Enviar<img class="e"
+                                    src="./img/rocket_launch_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
+                        </div>
+                    </div>
+
+
+
+                </div> <br>
+
+</body>
+<script>
+    let data = [];
+
+    function enviar() {
+        let nombre = document.getElementById("nombre").value;
+        let tipoMascota = document.getElementById("tipoMascota").value;
+        if (tipoMascota === "") {
+        // Mostrar una alerta indicando que se debe seleccionar un tipo de mascota
+        alert("Por favor, seleccione un tipo de mascota.");
+        return; 
+    }
+        let nombredueño = document.getElementById("nombredueño").value;
+        let telefono = document.getElementById("telefono").value;
+        
+        let documento = document.getElementById("documento").value;
+        let correo = document.getElementById("correo").value;
+        let fechacita = document.getElementById("fechacita").value;
+        document.getElementById("fechacita").addEventListener("change", function() {
+        var inputDate = new Date(this.value);
+        var currentDate = new Date();
+    
+    // Comprobar si la fecha seleccionada es en el futuro
+    if (inputDate < currentDate) {
+        alert("Por favor, selecciona una fecha futura.");
+        this.value = ""; // Limpiar el valor del campo de fecha
+    }
+});
+        let genero;
+        if (document.getElementById("g1").checked) {
+            genero = document.getElementById("g1").value;
+        } else if (document.getElementById("g2").checked) {
+            genero = document.getElementById("g2").value;
+        }
+
+        console.log("Nombre: " + nombre);
+        console.log("tipoMascota:" + tipoMascota);
+        console.log("nombredueño:" + nombredueño);
+        console.log("Telefono: " + telefono);
+        console.log("documento: " + documento);
+        console.log("Correo: " + correo);
+        console.log("Fecha de cita: " + fechacita);
+        console.log("Género: " + genero);    
+        
+        
+
+        let nuevoItem = {
+            nombre: nombre,
+            tipoMascota: tipoMascota,
+            nombredueño: nombredueño,
+            telefono: telefono,
+            documento: documento,
+            correo: correo,
+            fechacita: fechacita,          
+            genero: genero,
+        };
+
+        data.push(nuevoItem);
+
+        document.getElementById("nombre").value = "";
+        document.getElementById("tipoMascota").value = "";
+        document.getElementById("nombredueño").value = "";
+        document.getElementById("telefono").value = "";
+        
+        document.getElementById("documento").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("fechacita").value = "";
+        document.getElementById("g1").checked = false;
+        document.getElementById("g2").checked = false;
+        pintar();
+    }
+    function pintar() {
+    let tabla = document.getElementById('table1').getElementsByTagName('tbody')[0];
+    tabla.innerHTML = "";
+
+    data.forEach((item, i) => {
+        let fila = tabla.insertRow();
+        fila.insertCell(0).textContent = item.nombre;
+        fila.insertCell(1).textContent = item.tipoMascota;
+        fila.insertCell(2).textContent = item.nombredueño;
+        fila.insertCell(3).textContent = item.telefono;
+        fila.insertCell(4).textContent = item.documento;
+        fila.insertCell(5).textContent = item.correo;
+        fila.insertCell(6).textContent = item.fechacita;
+        fila.insertCell(7).textContent = item.genero;
+
+        let imagenCelda = fila.insertCell(8); // Nueva celda para la imagen
+        let imagen = document.createElement("img");
+        imagen.src = obtenerImagen(item.tipoMascota); 
+        // Obtener la URL de la imagen según el tipo de mascota
+        imagen.classList.add("fotos");
+        imagenCelda.appendChild(imagen);
+
+        let eliminar = document.createElement("button");
+        eliminar.textContent = "✕";
+        eliminar.classList.add("elimina")
+        eliminar.addEventListener("click", () => {
+            eliminarFila(i);
+        });
+
+        let editar = document.createElement("button");
+        editar.textContent = "✍️";
+        editar.classList.add("elimina")
+        editar.addEventListener("click", () => {
+            editarFila(i);
+            abrirModal()
+        });
+
+        let celda = fila.insertCell(9);
+        celda.appendChild(eliminar);
+        celda.appendChild(editar);
+    });
+}
+
+
+
+
+function obtenerImagen(tipoMascota) {
+    // Retorna la URL de la imagen según el tipo de mascota
+    switch (tipoMascota) {
+        case "ave":
+            return "./imagen/condor.jpeg";
+        case "perro":
+            return "./imagen/perro.jpeg";
+        case "gato":
+            return "./imagen/gatoss.jpeg";
+        case "reptil":
+            return "./imagen/reptil.jpeg";
+        default:
+            return ""; 
+    }
+}
+// Función para mostrar la imagen según la opción seleccionada
+function mostrarImagen() {
+    var select = document.getElementById("tipoMascota");
+    // Si se selecciona una opción distinta a "Tipo de mascota..."
+    if (select.value !== "") {
+        select.classList.add("selected");
+    } else {
+        select.classList.remove("selected");
+    }
+}
+
+    function eliminarFila(index) {
+        data.splice(index, 1);
+        pintar();
+    }
+    function abrirModal() {
+        let modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        modal.show();
+    }
+    function limpiarfilas() {
+    document.getElementById("nombre").value = "";
+    document.getElementById("tipoMascota").value = "tipoMascota";
+    document.getElementById("nombredueño").value = "";
+    document.getElementById("telefono").value = "";
+    document.getElementById("documento").value = "";
+    document.getElementById("correo").value = "";
+    document.getElementById("fechacita").value = "";
+    document.getElementById("g1").checked = false;
+    document.getElementById("g2").checked = false;
+    pintar();
+}
+    function editarFila(index) {
+        let item = data[index];
+
+        document.getElementById("nombre").value = item.nombre;
+        document.getElementById("tipoMascota").value = item.tipoMascota;
+        document.getElementById("nombredueño").value = item.nombredueño;
+        document.getElementById("telefono").value = item.telefono;
+        document.getElementById("documento").value = item.documento;
+        document.getElementById("correo").value = item.correo;
+        document.getElementById("fechacita").value = item.fechacita;
+
+        if (item.genero === "Macho") {
+            document.getElementById("g1").checked = true;
+        } else if (item.genero === "Hembra") {
+            document.getElementById("g2").checked = true;
+        }
+        data.splice(index, 1);
+        pintar();
+    }
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+</html>
