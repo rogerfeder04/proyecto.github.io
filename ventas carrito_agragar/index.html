@@ -1,98 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="pagina.css">
+    <link rel="stylesheet" href="@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');">
 </head>
+
 <body>
     <header>
         <div class="banner">
-            <h1>LO MEJOR EN LIMPIEZA PARA EL HOGAR</h1>
+            <p>ILUMINANDO SUEÑOS CON LA MEJOR CALIDAD</p>
+            <p>🛡️</p>
+            <img class="fondo" src="./imagenes/bannertres.jpg" alt="">
         </div>
+        <!-- parte  __SERVICIOS___  -->
 
-        <button class="btn-show-info"> añadidos_car
-            <div id="itemsList"></div></button>
-      
+        <div id="carro">
+            <button class="btn-show-info">
+                <p class="car">🛻
+                    <span id="cantidadCarrito">0</span>
+                </p>
+
+                <div id="itemsList" style="display: none;"> </div>
+        </div>
     </header>
-    <section>
-        <div id="contenedor">
-            <div>
-            <div id="imagen"> <img    src="./imagenes/images.jfif" alt="Producto"></div>
-            <div class="info">
-                <h2 id="producto">Jabon liquido</h2>
-                <p class="precio">$ 12000</p>
-                <p class="descripcion">Jabon lavaplatos 750 ml</p>
-                <button class="añadir" onclick="agregar_item_carro(this)">añadir_al_carrito</button>
-            </div>
-        </div>
-        <div >
-            <div id="imagen"><img  src="./imagenes/jabondesengrasante.jfif" alt="Producto">  </div>
-                <div class="info">
-                     <h2 id="producto">Jabon desengrasante</h2>
-                    <p class="precio">$ 25000</p>
-                    <p class="descripcion">Jabon multiusos por 1000 ml</p>
-                    <button class="añadir" onclick="agregar_item_carro(this)">añadir_al_carrito</button>
-                </div>
-            </div>
-                <div>
-                    <br><br>
-                <div id="imagen"><img    src="./imagenes/esponja2.jfif" alt="Producto"> </div>
-                    <div class="info">
-                        <h2 id="producto">Esponjas limpieza cocina </h2>
-                        <p class="precio">$ 15000</p>
-                        <p class="descripcion">Juego de esponjas por 12 unidades</p>
-                        <button class="añadir" onclick="agregar_item_carro(this)">añadir_al_carrito</button>
-                    </div>
-                </div>
-        </div>
+
+
+    <section id="container">
     </section>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left">
+                    <p>© Material eléctrico. Tienda de eléctricidad online.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        function agregar_item_carro(btn) {
-            // Obtener el elemento padre del botón
-            let element = btn.parentElement.parentElement;
+        let productos = [
+            {
+                imagen: "./imagenes/led.jpg",
+                nombre: " Panel Led 18w ",
+                precio: 12000,
+                descripcion: "Incrustar Luz Blanca"
 
-            // Crear los elementos para el carrito
-            let itemInCart = document.createElement("div");
-            let itemName = document.createElement("p");
-            let itemPrice = document.createElement("p");
-            let itemImage = document.createElement("img");
+            },
+            {
+                imagen: "./imagenes/lamparas.jpg",
+                nombre: "Lampara Led 36w",
+                precio: 17000,
+                descripcion: "Sobreponer Antipolvo"
+            },
+            {
+                imagen: "./imagenes/cuadrada.jpg",
+                nombre: "Led Panel Rectangular ",
+                precio: 12000,
+                descripcion: "  30x120 Cm 40w Luz Blanca"
+            },
+            {
+                imagen: "./imagenes/bombillo.jpg",
+                nombre: "Bulbo LED Filamento 6W ",
+                precio: 18000,
+                descripcion: " Dimerizable Luz Amarilla E27"
+            },
+            {
+                imagen: "./imagenes/ojo2.jpg",
+                nombre: "Bombillo Led Spot ",
+                precio: 28000,
+                descripcion: "Inteligente 5W CCT ZM"
+            },
+            {
+                imagen: "./imagenes/mecha.jpg",
+                nombre: "Bombillos Vela 4w ",
+                precio: 650000,
+                descripcion: "E27 2700k Set X 100 Unidades"
+            },
+            {
+                imagen: "./imagenes/tortuge.jpg",
+                nombre: "Aplique LED Tortuga 20w ",
+                precio: 33000,
+                descripcion: "Negro Luz Fría Set"
+            },
+            {
+                imagen: "./imagenes/sensor.jpg",
+                nombre: "Sensor De Movimiento ",
+                precio: 23000,
+                descripcion: " Techo 360 Grados"
+            },
+            {
+                imagen: "./imagenes/toma.jpg",
+                nombre: "Tomacorriente Fija Doble",
+                precio: 11200,
+                descripcion: " Vta+ Smart Home Color Blanco"
+            },
+            {
+                imagen: "./imagenes/inteli.jpg",
+                nombre: "Enchufe Inteligente Toma Wifi",
+                precio: 40000,
+                descripcion: " Smart Google Assistant Y Alexa"
+            },
 
-            // Asignar clases y estilos (opcional)
-            itemInCart.classList.add("item-in-cart");
-            itemImage.classList.add("item-image");
-            itemName.classList.add("item-name");
-            itemPrice.classList.add("item-price");
+            {
+                imagen: "./imagenes/tacos.jpg",
+                nombre: "Mini-breaker *2",
+                precio: 40000,
+                descripcion: " 20amp,(tipo Riel)"
+            },
+            {
+                imagen: "./imagenes/medidor.jpg",
+                nombre: "Medidor de energia ",
+                precio: 80000,
+                descripcion: "Bifasico,conexión asimetrica"
+            },
+        ]
+        const carrito = [];
 
-            // Asignar los valores correspondientes
-            itemName.textContent = element.querySelector(".info h2").textContent;
-            itemPrice.textContent = element.querySelector(".info p").textContent;
-            itemImage.src = element.getElementsByTagName("img")[0].src;
+        document.addEventListener("DOMContentLoaded", () => {
+            pintarProductos();
+            mostrarCarrito(); // Mostrar el carrito al cargar la página
+        })
 
-            // Agregar los elementos al carrito
-            document.getElementById("itemsList").appendChild(itemInCart);
-            itemInCart.appendChild(itemImage);
-            itemInCart.appendChild(itemName);
-            itemInCart.appendChild(itemPrice);
 
-            // Actualizar el botón de selección
-            let btnCart = document.querySelector(".btn-cart");
-            btnCart.innerHTML = `<span class="cart-icon"></span> seleccion: ${element.querySelector(".info h2").textContent}`;
+        function pintarProductos() {
+            productos.forEach((item, index) => {
+                let div = document.createElement("div");
+                div.classList = "item";
+
+                let imagen = document.createElement("img");
+                imagen.src = item.imagen;
+                imagen.classList = "imagen";
+                div.appendChild(imagen);
+
+                let nombre = document.createElement("span");
+                nombre.textContent = item.nombre;
+                nombre.classList = "titulo";
+                div.appendChild(nombre);
+
+                let precio = document.createElement("span");
+                precio.textContent = "$" + item.precio.toLocaleString();
+                precio.classList = "titulo";
+
+                div.appendChild(precio);
+
+                let descripcion = document.createElement("span");
+                descripcion.textContent = item.descripcion;
+                descripcion.classList = "titulo";
+                div.appendChild(descripcion);
+
+                let boton = document.createElement("button");
+                boton.classList = "añadir";
+                boton.textContent = "Comprar";
+                div.appendChild(boton);
+
+                document.getElementById("container").appendChild(div);
+
+                boton.addEventListener("click", () => {
+                    agregarAlCarrito(item);
+                    mostrarCarrito();
+                });
+            });
         }
 
-        function mostrar_informacion() {
-            let items = document.querySelectorAll(".item-in-cart");
-            let info = "Productos en el carrito:\n";
+        // Función para agregar ítem al carrito
+        function agregarAlCarrito(item) {
+            let encontrado = true;
+            carrito.forEach((producto) => {
+                if (producto.nombre === item.nombre) {
+                    producto.cantidad++;
+                    encontrado = false;
+                }
+            });
+            if (encontrado) {
+                item.cantidad = 1;
+                carrito.push(item);
+            }
 
-            items.forEach(function(item) {
-                let itemName = item.querySelector(".item-name").textContent;
-                let itemPrice = item.querySelector(".item-price").textContent;
-                info += `${itemName} - ${itemPrice}\n`;
+            console.log(carrito);
+            mostrarCarrito();
+            actualizarCantidadCarrito(); // Llamar a la función para actualizar la cantidad en el carrito
+        }
+
+        // function eliminarDelCarrito(index) {
+        //     carrito.splice(index, 1);
+        //     console.log(carrito); // Agregar esto para verificar el estado del carrito
+        //     mostrarCarrito();
+
+        //     actualizarCantidadCarrito(); // Llamar a la función para actualizar la cantidad en el carrito
+
+        function actualizarCantidadCarrito() {
+            const cantidadCarrito = document.getElementById("cantidadCarrito");
+            let totalItems = 0;
+            carrito.forEach((item) => {
+                totalItems += item.cantidad;
+            });
+            cantidadCarrito.textContent = totalItems;
+        }
+
+
+        // Función para mostrar el carrito
+        function mostrarCarrito() {
+            const itemsList = document.getElementById("itemsList");
+            itemsList.innerHTML = "";
+            let totalPrecio = 0;
+
+            carrito.forEach((item, index) => {
+                const itemElement = document.createElement("div");
+                itemElement.classList.add("contenido");
+                // Crear imagen
+                const imagen = document.createElement("img");
+                imagen.src = item.imagen;
+                imagen.alt = item.nombre;
+                itemElement.appendChild(imagen);
+
+                // Crear nombre
+                const nombre = document.createElement("p");
+                nombre.textContent = item.nombre;
+                itemElement.appendChild(nombre);
+
+                // Crear precio
+                const precio = document.createElement("p");
+                precio.textContent = "$" + item.precio.toLocaleString(); // Formatear el precio con punto como separador de miles
+                itemElement.appendChild(precio);
+
+                totalPrecio += item.precio * item.cantidad; // Sumar el precio al total
+
+                // Crear cantidad
+                const cantidad = document.createElement("p");
+                cantidad.textContent = "Cantidad: " + item.cantidad;
+                itemElement.appendChild(cantidad);
+
+                // Crear descripción
+                const descripcion = document.createElement("p");
+                descripcion.textContent = item.descripcion;
+                itemElement.appendChild(descripcion);
+
+                // Crear botón eliminar
+
+                const btnEliminar = document.createElement("button");
+                btnEliminar.textContent = "Eliminar";
+                btnEliminar.classList = "boton";
+                btnEliminar.addEventListener("click", () => {
+                    if (index >= 0 && index < carrito.length) {
+                        carrito[index].cantidad--; 
+                        if (carrito[index].cantidad <= 0) {
+                            carrito.splice(index, 1); 
+                        }
+                    }
+
+                    mostrarCarrito();
+                    actualizarCantidadCarrito();
+                });
+
+                itemElement.appendChild(btnEliminar);
+                itemsList.appendChild(itemElement);
+
             });
 
-            alert(info);
+            // Mostrar el botón para vaciar el carrito
+            const btnVaciarCarrito = document.createElement("button");
+            btnVaciarCarrito.textContent = "Vaciar Carrito";
+            btnVaciarCarrito.classList = "boton-vaciar";
+            btnVaciarCarrito.addEventListener("click", () => {
+                carrito.splice(0, carrito.length);
+                mostrarCarrito();
+                actualizarCantidadCarrito();
+
+            });
+            itemsList.appendChild(btnVaciarCarrito);
+
+            // Mostrar el total al final de la lista
+            const totalElement = document.createElement("p");
+            totalElement.textContent = "Total: $" + totalPrecio.toLocaleString(); // Formatear el total con punto como separador de miles
+            totalElement.classList.add("total");
+            itemsList.appendChild(totalElement);
+            itemsList.style.display = "block"; // Mostrar el carrito
+
+            const btnShowInfo = document.querySelector('.btn-show-info');
+            btnShowInfo.addEventListener("click", () => {
+                itemsList.style.display = "block";
+            });
+
+            // Agregar evento para ocultar el carrito al alejar el mouse
+            itemsList.addEventListener("mouseleave", () => {
+                itemsList.style.display = "none";
+            });
         }
+
     </script>
 </body>
+
 </html>

@@ -3,56 +3,96 @@
 /* cuerpo de la pagina */
 
 body {
-    font-family: Arial, sans-serif;
     box-sizing: border-box;
+    padding: 10px 0px;
+    font-family: 'Roboto', sans-serif;
 }
 
 header {
-    background-color: #f1f1f1;
-    padding: 20px;
+    background-color: #333;
+    padding: 30px;
     text-align: center;
 }
 
+
+
+/* 
 .banner {
+    position: relative;
+    width: 89%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
+} */
+.banner {.banner {
     background-color: #333;
+    color: white;
+    width: 100%;
+    height: 100vh; /* Cubre toda la altura de la pantalla */
+    background-size: cover;
+    position: fixed; /* Se queda fijo en la ventana del navegador */
+    top: 0; /* Se mantiene en la parte superior */
+    left: 0; /* Se mantiene al inicio horizontal */
+}
+p{
     color: white;
 }
 
-#contenedor {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
 }
-
-.info {
-    text-align: center;
+.banner .fondo{
+    width: 100%;
+    height: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* width: 100%; */
+    /* height: auto; */
+    z-index: -1;
 }
-
-.precio {
-    font-weight: bold;
-    color: #f1f1f1;
-    background-color: #333;
-    padding: 5px;
-    margin: 10px;
-}
-
 .añadir {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
+    background-color: #333; /* Color oscuro que combina bien con azul claro */
+    color: white; /* Texto en color blanco para crear contraste */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    font-size: 16px; /* Tamaño de la fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    border-radius: 5px; /* Añade bordes redondeados */
+}
+#itemsList img {
+    width: 50px; /* Ancho deseado para las imágenes */
+    height: auto; /* Altura automática para mantener la proporción */
+    margin-right: 2px; /* Espacio entre las imágenes */
+
 }
 
-.añadir:hover {
-    background-color: #555;
+#container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+    text-align: center;
+    justify-content: center;   
+    background-color: #6f8792;
+  padding: 10px;
+ 
 }
-#imagen img {
-    width: 200px;
-    height: auto; 
+#container .item{
+    text-align: center;
+    padding: 20px;
+}
+.imagen {
+    width: 250px;
+    height: 200px; 
     align-items: center;
+    border-radius: 12px;
+}
+
+#itemsList .div{
+    border: double;
+}
+.item .titulo{
+    display: flex;
+font-size: 20px;
+justify-content: space-around;
 }
 /* parte carrito */
 .btn-cart {
@@ -66,7 +106,10 @@ header {
     position: relative;
     overflow: hidden;
   }
-  
+  .boton-vaciar{
+    background-color: bisque;
+    border-radius: 15px;
+  }
   .cart-icon {
     width: 20px;
     height: 20px;
@@ -81,8 +124,84 @@ header {
     margin-right: 10px;
   }
 
-  .item-image{
+ .itemsList .imagen{
     width: 50px;
     height: 50px;
   }
-  
+  .contenido{
+    border: double;
+  }
+   .total {
+    color: red;
+    font-size: 15px;  }
+  .item{
+   border: solid 1px #333;
+   border-radius: 10px;
+  }
+   /* seccion footer */
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+}
+
+.footer p {
+    margin-bottom: 0;
+    text-align: center;
+}
+.btn-show-info {
+    position: fixed;
+    top: 22px;
+    right: 7px;
+    overflow-y: scroll;
+    max-height: 80vh;
+    /* font-size: xx-large; */
+}
+.btn-show-info .car{
+    font-size:  25px;
+}
+.boton{
+    cursor: pointer;
+    color: rgb(219, 138, 138);
+    background: oldlace;
+}
+
+
+/* Media query para dispositivos pequeños */
+/* @media (max-width: 768px) {
+    .footer .container {
+        text-align: center;
+    }
+    .footer .row {
+        display: flex;
+        flex-direction: column;
+    }
+    .footer .row > div {
+        margin-bottom: 15px;
+    }
+    .social-icons {
+        margin-top: 15px;
+    }
+} */
+  @media (max-width: 500px) {
+    .btn-show-info {
+        position: fixed;
+        right: 8px;
+        height: 105px;
+        width: 45px;
+        /* top: 55px; */
+        overflow-y: scroll;
+        max-height: 50vh;
+}
+.boton{
+    font-size: 3px;
+}
+    #itemsList img {
+        width: 30px;
+        height: auto;
+        margin-right: 2px;
+    }
+    .contenido{
+        font-size: 4px;
+    }
+}
