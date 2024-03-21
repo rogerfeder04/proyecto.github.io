@@ -28,6 +28,7 @@ body {
 .tarjeta{
   width: 300px;
   height: auto;
+  overflow: hidden;
   border: 1px solid #198754;
   border-radius: 5px;
   padding: 10px;
@@ -39,7 +40,10 @@ body {
 }
 
 p {
-  text-align: center;
+  text-align: left;
+}
+.ps{
+text-align: center;
 }
 
 .tarjeta p {
@@ -49,13 +53,11 @@ p {
   font-size: 16px; /* Tamaño de fuente */
   line-height: 1.5; /* Altura de línea */
 }
-
 /* Bordes bonitos para los párrafos */
 .tarjeta p {
   border-bottom: 1px dashed #ccc; /* Línea punteada en la parte inferior */
   padding-bottom: 0.5rem; /* Espaciado inferior para separar las líneas */
 }
-
 /* Estilos para el último párrafo dentro de la tarjeta */
 .tarjeta p:last-child {
   border-bottom: none; /* Elimina el borde inferior del último párrafo */
@@ -83,11 +85,18 @@ select {
   width: 100%;
   padding: 5px;
   margin: 10px 0;
-  border: 1px solid #ddd;
+  border: 1px solid #be2656;
   border-radius: 5px;
   outline: none;
 }
 
+#sintomas{
+height: 150px; /* Puedes ajustar la altura según tus necesidades */
+/* Otros estilos opcionales */
+padding: 5px;
+font-size: 16px;
+font-family: Arial, sans-serif;
+}
 h1 {
   font-size: 1.5rem;
   text-align: center;
@@ -96,7 +105,7 @@ h1 {
 button {
   background-color: #007bff;
   color: white;
-  padding: 12px 70px;
+  padding: 5px 50px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -149,3 +158,9 @@ button:hover {
 #boton2:hover {
   background-color: #f0f0f0;
 }
+.error-message {
+  color: red;
+  font-size: 12px;
+  display: none; /* Inicialmente oculto */
+}
+@import "../node_modules/bootstrap/scss/bootstrap";

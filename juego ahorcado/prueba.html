@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego</title>
+    <link rel="stylesheet" href="prueba.css">
+</head>
+<body>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Juego</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Bienvenido al juego</h1>
+            <button id="playButton">¡Jugar!</button>
+            <div id="categories" style="display: none;">
+                <h2>Selecciona una categoría:</h2>
+                <ul>
+                    <li><button class="categoryButton" data-category="categoria1">Categoría 1</button></li>
+                    <li><button class="categoryButton" data-category="categoria2">Categoría 2</button></li>
+                    <li><button class="categoryButton" data-category="categoria3">Categoría 3</button></li>
+                </ul>
+            </div>
+            <div id="difficulty" style="display: none;">
+                <h2>Selecciona una dificultad:</h2>
+                <ul>
+                    <li><button class="difficultyButton" data-difficulty="facil">Fácil</button></li>
+                    <li><button class="difficultyButton" data-difficulty="medio">Medio</button></li>
+                    <li><button class="difficultyButton" data-difficulty="dificil">Difícil</button></li>
+                </ul>
+            </div>
+            <div id="game" style="display: none;">
+                <img id="backgroundImg" src="" alt="Juego iniciado">
+                <div id="keyboard">
+                    <!-- Se generará dinámicamente el teclado aquí -->
+                </div>
+            </div>
+        </div>
+    
+        <script src="script.js"></script>
+    </body>
+    </html>
+    
+
+ <script>
+  document.getElementById('playButton').addEventListener('click', function() {
+    document.getElementById('categories').style.display = 'block';
+});
+
+document.querySelectorAll('.categoryButton').forEach(button => {
+    button.addEventListener('click', function() {
+        var category = this.dataset.category;
+        document.getElementById('categories').style.display = 'none';
+        document.getElementById('difficulty').style.display = 'block';
+    });
+});
+
+document.querySelectorAll('.difficultyButton').forEach(button => {
+    button.addEventListener('click', function() {
+        var difficulty = this.dataset.difficulty;
+        document.getElementById('difficulty').style.display = 'none';
+        document.getElementById('game').style.display = 'block';
+        // Cambiar la imagen de fondo dependiendo de la dificultad seleccionada
+        document.getElementById('backgroundImg').src = 'ruta_a_la_imagen.jpg';
+        // Generar el teclado con las letras del abecedario
+        var keyboard = document.getElementById('keyboard');
+        var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        for (var i = 0; i < alphabet.length; i++) {
+            var key = document.createElement('button');
+            key.textContent = alphabet[i];
+            key.classList.add('key');
+            keyboard.appendChild(key);
+        }
+    });
+});
+
+
+
+ </script>
+</body>
+</html>

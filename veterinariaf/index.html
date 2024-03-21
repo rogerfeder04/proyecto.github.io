@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    </a>
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="veterinariaf.css">
     <title>Formulario mascotas</title>
@@ -18,13 +17,15 @@
     <div id="tabla">
         <button type="button" style="color: black;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Ingresar Datos mascota
-            </button>
-            <div id="contenedor-tarjetas"></div>
-              
-              <template id="card-template">
-                <div class="card" style="width: 18rem;">
-                  <img src="" class="card-img-top" alt="...">
-                  <div class="card-body">
+        </button>
+  
+       
+        <div id="contenedor-tarjetas"></div>
+
+        <template id="card-template">
+            <div class="card" style="width: 18rem;">
+                <img src="" class="card-img-top" alt="...">
+                <div class="card-body">
                     <h5 class="card-title">Nombre mascota</h5>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Tipo de mascota</h6>
                     <p class="card-text">Nombre dueño</p>
@@ -32,11 +33,15 @@
                     <p class="card-text">N° Documento</p>
                     <p class="card-text">Correo</p>
                     <p class="card-text">Fecha cita</p>
-                    <p class="card-text">Genero</p>
+
+                    <p class="card-text">Hora cita</p>
+                    <p class="card-text">Síntomas</p>
+                    <p class="card-text">Género</p>
+                    <p class="card-text" id="estado-cita">Estado cita</p>
                     <button class="btn btn-primary">Opciones</button>
-                  </div>
                 </div>
-              </template>
+            </div>
+        </template>
     </div>
    
     <!-- Modal -->
@@ -45,15 +50,27 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    
                             <div id="contenedor2"> formulario Mascota
+                                <div class="alert alert-success" role="alert" id="alerta" style="display: none;">
+                                    actualizado
+                                </div>
+                                <div class="alert alert-danger" role="alert" id="alerta2" style="display: none;">
+                                    A simple danger alert—check it out!
+                                </div>
+                              
                                 <input type="text" placeholder="Nombre_Mascota" id="nombre">
+                                <span id="nombre-error" class="error-message" style="display: none;">
+                                    Por favor, ingrese un nombre.</span>
                                 <select name="Tipo de mascota" id="tipoMascota" onchange="mostrarImagen()">
                                     <option value="" selected disabled>Tipo de mascota...</option>
                                     <option value="ave">Ave</option>
                                     <option value="perro">Perro</option>
                                     <option value="gato">Gato</option>
                                     <option value="reptil">Reptil</option>
+
                                 </select>
+        
                                 <input type="text" placeholder="Nombre_dueño..." id="nombredueño">
                                 <input type="text" placeholder="Telefono..." id="telefono">
                                 
@@ -61,7 +78,12 @@
                                 <input type="text" placeholder="Correo..." id="correo">
                                 <h3 id="fecha">Fecha proxima cita</h3>
                                 <input type="date" placeholder="Fecha proxima cita" id="fechacita">
-                                <div id="botones">
+                               <h3 id="fecha">hora proxima cita</h3>
+                              <input type="time" placeholder="Hora próxima cita" id="horacita" onchange="validarHora()">
+                                 <p id="mensajeError" style="color: red;"></p>
+                                <input type="text" placeholder="sintomas" id="sintomas">
+
+                                <div id="botones">                                    
                                     <h3 id="fecha1">Genero</h3>
                                     <button id="boton1"><img class="m" src="./imagen/masculino.png"
                                             alt=""></button>
@@ -88,23 +110,157 @@
 function enviar() {
     let nombre = document.getElementById("nombre").value;
     let tipoMascota = document.getElementById("tipoMascota").value;
-    if (tipoMascota === "") {
-        // Mostrar una alerta indicando que se debe seleccionar un tipo de mascota
-        alert("Por favor, seleccione un tipo de mascota.");
-        return; 
-    }
     let nombredueño = document.getElementById("nombredueño").value;
     let telefono = document.getElementById("telefono").value;
     let documento = document.getElementById("documento").value;
     let correo = document.getElementById("correo").value;
     let fechacita = document.getElementById("fechacita").value;
-    
+    let horacita = document.getElementById("horacita").value;
+    let sintomas = document.getElementById("sintomas").value;
     let genero;
     if (document.getElementById("g1").checked) {
         genero = document.getElementById("g1").value;
     } else if (document.getElementById("g2").checked) {
         genero = document.getElementById("g2").value;
     }
+
+    //validacion:
+    if (nombre.trim() === "") {
+    // Mostrar la alerta
+    document.getElementById("alerta2").innerHTML = "Por favor, ingrese un nombre Mascota.";
+    document.getElementById("alerta2").style.display = "block";
+
+    // Ocultar la alerta después de 3 segundos
+    setTimeout(function() {
+        document.getElementById("alerta2").style.display = "none";
+    }, 3000);
+    return;
+    } else {
+        document.getElementById("alerta2").style.display = "none";
+    }
+
+    if (tipoMascota.trim() === "") {
+        // Mostrar una alerta de Bootstrap indicando que se debe llenar el nombre
+        document.getElementById("alerta2").innerHTML = "Por favor, tipo de mascota.";
+        document.getElementById("alerta2").style.display = "block";
+        setTimeout(function() {
+        document.getElementById("alerta2").style.display = "none";
+    }, 3000);
+        return;
+    } else {
+        document.getElementById("alerta2").style.display = "none";
+    }
+    if (nombredueño.trim() === "") {
+        // Mostrar una alerta de Bootstrap indicando que se debe llenar el nombre
+        document.getElementById("alerta2").innerHTML = "Por favor,ingrese nombre dueño.";
+        document.getElementById("alerta2").style.display = "block";
+        setTimeout(function() {
+        document.getElementById("alerta2").style.display = "none";
+    }, 3000);
+        return;
+    } else {
+        document.getElementById("alerta2").style.display = "none";
+    }
+    if (telefono.trim() === "") {
+        // Mostrar una alerta de Bootstrap indicando que se debe llenar el nombre
+        document.getElementById("alerta2").innerHTML = "Por favor, ingrese telefono.";
+        document.getElementById("alerta2").style.display = "block";
+        setTimeout(function() {
+        document.getElementById("alerta2").style.display = "none";
+    }, 3000);
+        return;
+    } else {
+        document.getElementById("alerta2").style.display = "none";
+    }
+    if (documento.trim() === "") {
+        // Mostrar una alerta de Bootstrap indicando que se debe llenar el nombre
+        document.getElementById("alerta2").innerHTML = "Por favor, ingrese documento.";
+        document.getElementById("alerta2").style.display = "block";
+        setTimeout(function() {
+        document.getElementById("alerta2").style.display = "none";
+    }, 3000);
+        return;
+    } else {
+        document.getElementById("alerta2").style.display = "none";
+    }
+    if (correo.trim() === "") {
+        // Mostrar una alerta de Bootstrap indicando que se debe llenar el nombre
+        document.getElementById("alerta2").innerHTML = "Por favor, ingrese un correo.";
+        document.getElementById("alerta2").style.display = "block";
+        setTimeout(function() {
+        document.getElementById("alerta2").style.display = "none";
+    }, 3000);
+        return;
+    } else {
+        document.getElementById("alerta2").style.display = "none";
+    }
+    if (fechacita.trim() === "") {
+        // Mostrar una alerta de Bootstrap indicando que se debe llenar el nombre
+        document.getElementById("alerta2").innerHTML = "Por favor,selecione una fecha.";
+        document.getElementById("alerta2").style.display = "block";
+        setTimeout(function() {
+        document.getElementById("alerta2").style.display = "none";
+    }, 3000);
+        return;
+    } else {
+        document.getElementById("alerta2").style.display = "none";
+    }
+    if (horacita.trim() === "") {
+      //  Mostrar una alerta de Bootstrap indicando que se debe llenar el nombre
+       document.getElementById("alerta2").innerHTML = "Por favor,seleccione hora cita .";
+       document.getElementById("alerta2").style.display = "block";
+       setTimeout(function() {
+       document.getElementById("alerta2").style.display = "none";
+    }, 3000);
+       return;
+    } else {
+        document.getElementById("alerta2").style.display = "none";
+    }
+    if (sintomas.trim() === "") {
+        // Mostrar una alerta de Bootstrap indicando que se debe llenar el nombre
+        document.getElementById("alerta2").innerHTML = "Por favor,escribe sintomas .";
+        document.getElementById("alerta2").style.display = "block";
+        setTimeout(function() {
+        document.getElementById("alerta2").style.display = "none";
+    }, 3000);
+        return;
+    } else {
+        document.getElementById("alerta2").style.display = "none";
+    }
+    if (!document.getElementById("g1").checked && !document.getElementById("g2").checked) {
+        // Mostrar una alerta de Bootstrap indicando que se debe seleccionar un género
+        document.getElementById("alerta2").innerHTML = "Por favor, seleccione un género.";
+        document.getElementById("alerta2").style.display = "block";
+        setTimeout(function() {
+        document.getElementById("alerta2").style.display = "none";
+    }, 3000);
+        return;
+    } else {
+        document.getElementById("alerta2").style.display = "none";
+        if (document.getElementById("g1").checked) {
+            genero = document.getElementById("g1").value;
+        } else if (document.getElementById("g2").checked) {
+            genero = document.getElementById("g2").value;
+        }
+        document.getElementById("alerta").style.display = "block";
+        setTimeout(function() {
+        document.getElementById("alerta").style.display = "none";
+    }, 3000);
+        
+    }
+//     if (nombre === "") {
+//     // Mostrar el mensaje de error junto al campo de nombre
+//     document.getElementById("nombre-error").style.display = "block";
+//     // Ocultar el mensaje de error después de 3 segundos
+//     setTimeout(function() {
+//         document.getElementById("nombre-error").style.display = "none";
+//     }, 3000);
+//     return; 
+// }    else {
+//     // Ocultar el mensaje de error si el campo de nombre está completo
+//     document.getElementById("nombre-error").style.display = "none";
+// }
+
 
     if (indiceEditando !== null) {
         // Si se está editando un elemento existente, actualizarlo en lugar de agregar uno nuevo
@@ -116,6 +272,8 @@ function enviar() {
             documento: documento,
             correo: correo,
             fechacita: fechacita,
+            horacita:horacita,
+            sintomas:sintomas,
             genero: genero
         };
         // Limpiar el índice de edición
@@ -129,7 +287,9 @@ function enviar() {
             telefono: telefono,
             documento: documento,
             correo: correo,
-            fechacita: fechacita,          
+            fechacita: fechacita,
+            horacita:horacita,
+            sintomas,sintomas,          
             genero: genero,
         };
         data.push(nuevoItem);
@@ -138,6 +298,34 @@ function enviar() {
     pintarTarjetas(); // Pintar las tarjetas actualizadas
     limpiarFormulario(); // Limpiar el formulario después de enviar
 }
+//funcion vañlidar hora
+function validarHora() {
+    let input = document.getElementById("horacita");
+    let hora = input.value;
+    let partesHora = hora.split(":");
+    let horaSeleccionada = parseInt(partesHora[0]);
+    
+    let mensajeError = document.getElementById("mensajeError");
+
+    if (horaSeleccionada < 8 || horaSeleccionada >= 17) {
+        mensajeError.textContent = "Favor seleccione,la hora  entre las 8 am y las 5 pm; cerramos a las 6pm";
+        input.value = ""; // Limpiar el valor del campo de entrada
+    } else {
+        mensajeError.textContent = ""; // Limpiar el mensaje de error si es válido
+    }
+}
+
+// Obtener la fecha actual
+let fechaActual = new Date();
+
+// Formatear la fecha actual en el formato YYYY-MM-DD para el atributo min
+let year = fechaActual.getFullYear();
+let month = (fechaActual.getMonth() + 1).toString().padStart(2, '0'); // Agregar cero inicial si es necesario
+let day = fechaActual.getDate().toString().padStart(2, '0'); // Agregar cero inicial si es necesario
+let fechaMin = year + '-' + month + '-' + day;
+// Establecer el atributo min del campo de entrada de fecha
+document.getElementById("fechacita").setAttribute("min", fechaMin);
+
 function limpiarFormulario() {
     document.getElementById("nombre").value = "";
     document.getElementById("tipoMascota").value = "";
@@ -146,22 +334,28 @@ function limpiarFormulario() {
     document.getElementById("documento").value = "";
     document.getElementById("correo").value = "";
     document.getElementById("fechacita").value = "";
+    document.getElementById("horacita").value="";
+    document.getElementById("sintomas").value="";
     document.getElementById("g1").checked = false;
     document.getElementById("g2").checked = false;
 }
 
 function pintarTarjetas() {
-    let contenedorTarjetas = document.getElementById('contenedor-tarjetas');
-    contenedorTarjetas.innerHTML = ""; // Limpiar el contenedor antes de pintar las tarjetas nuevamente
+            let contenedorTarjetas = document.getElementById('contenedor-tarjetas');
+            contenedorTarjetas.innerHTML = ""; // Limpiar el contenedor antes de pintar las tarjetas nuevamente
 
-    data.forEach((item, i) => {
-        let tarjeta = document.createElement('div');
-        tarjeta.classList.add('tarjeta');
+            data.forEach((item, i) => {
+                let tarjeta = document.createElement('div');
+                tarjeta.classList.add('tarjeta');
 
-   
+                let estadoCita = document.createElement('p');
+                estadoCita.textContent = `Estado cita: ${determinarEstadoCita(item.fechacita, item.horacita)}`;
+                estadoCita.classList.add('ps');
+                tarjeta.appendChild(estadoCita);
 
         let tipoMascota = document.createElement('p');
         tipoMascota.textContent = ` ${item.tipoMascota}`;
+        estadoCita.classList.add('ps');
         tarjeta.appendChild(tipoMascota);
 
         let imagenCelda = document.createElement('img');
@@ -193,6 +387,14 @@ function pintarTarjetas() {
     let fechacita = document.createElement('p');
     fechacita.textContent = `Fecha cita: ${item.fechacita}`;
     tarjeta.appendChild(fechacita);
+    
+    let horacita=document.createElement('p');
+    horacita.textContent=`hora cita:${item.horacita}`;
+    tarjeta.appendChild(horacita);
+
+    let sintomas=document.createElement('P');
+    sintomas.textContent=`Sintomas: ${item.sintomas}`;
+    tarjeta.appendChild(sintomas);
 
     let genero = document.createElement('p');
     genero.textContent = `Género: ${item.genero}`;
@@ -237,6 +439,8 @@ function abrirModal() {
     document.getElementById("documento").value = item.documento;
     document.getElementById("correo").value = item.correo;
     document.getElementById("fechacita").value = item.fechacita;
+    document.getElementById("horacita").value=item.horacita;
+    document.getElementById("sintomas").value=item.sintomas;
     document.getElementById("g1").checked = item.genero === "Macho";
     document.getElementById("g2").checked = item.genero === "Hembra";
     // Establecer el índiceEditando
@@ -251,6 +455,8 @@ function enviarModal() {
     let documento = document.getElementById("documento").value;
     let correo = document.getElementById("correo").value;
     let fechacita = document.getElementById("fechacita").value;
+    let horacita=document.getElementById("horacita").value;
+    let sintomas=document.getElementById("sintomas").value;
     let genero = document.getElementById("g1").checked ? "Macho" : "Hembra";
 
     // Crear el objeto del ítem editado
@@ -262,6 +468,8 @@ function enviarModal() {
         documento: documento,
         correo: correo,
         fechacita: fechacita,
+        horacita:horacita,
+        sintomas:sintomas,
         genero: genero
     };
 
@@ -274,7 +482,18 @@ function enviarModal() {
     // Volver a pintar las tarjetas
     pintarTarjetas();
 }
-
+function determinarEstadoCita(fechaCita, horaCita) {
+            // Obtener la fecha y hora actual
+            let ahora = new Date();
+            // Convertir la fecha y hora de la cita en objetos de fecha y hora
+            let fechaHoraCita = new Date(`${fechaCita}T${horaCita}`);
+            // Comparar con la fecha y hora actual
+            if (fechaHoraCita <= ahora) {
+                return "Cerrada";
+            } else {
+                return "Abierta";
+            }
+        }
 
 function obtenerImagen(tipoMascota) {
     // Retorna la URL de la imagen según el tipo de mascota
@@ -313,18 +532,12 @@ function eliminarElemento(indice) {
   data.splice(indice, 1);
 }
 
-
-
-// // Llamar a la función para pintar las tarjetas después de cargar el DOM
-// document.addEventListener('DOMContentLoaded', () => {
-//   pintarTarjetas = pintarTarjetas.bind(this);
-//   pintarTarjetas();
-// });
-
-
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+crossorigin="anonymous"></script>
 
 </html>
+
+
