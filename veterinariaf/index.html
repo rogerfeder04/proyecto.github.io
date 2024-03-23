@@ -52,12 +52,7 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">
                     
                             <div id="contenedor2"> formulario Mascota
-                                <div class="alert alert-success" role="alert" id="alerta" style="display: none;">
-                                    actualizado
-                                </div>
-                                <div class="alert alert-danger" role="alert" id="alerta2" style="display: none;">
-                                    A simple danger alert—check it out!
-                                </div>
+                                
                               
                                 <input type="text" placeholder="Nombre_Mascota" id="nombre">
                                 <span id="nombre-error" class="error-message" style="display: none;">
@@ -93,6 +88,12 @@
                                     <input type="radio" id="g2" name="genero" value="Hembra" required>
                                     <button id="enviar" onclick="enviar()">Enviar<img class="e"
                                             src="./img/rocket_launch_FILL0_wght400_GRAD0_opsz24.png" alt=""></button>
+                                </div>
+                                <div class="alert alert-success" role="alert" id="alerta" style="display: none;">
+                                    actualizado
+                                </div>
+                                <div class="alert alert-danger" role="alert" id="alerta2" style="display: none;">
+                                    A simple danger alert—check it out!
                                 </div>
                         </div>  
                     </h1>
@@ -482,6 +483,7 @@ function enviarModal() {
     // Volver a pintar las tarjetas
     pintarTarjetas();
 }
+
 function determinarEstadoCita(fechaCita, horaCita) {
             // Obtener la fecha y hora actual
             let ahora = new Date();
