@@ -1,43 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Juego</title>
+    <link rel="stylesheet" href="pag.css">
 </head>
+
 <body>
-     <div></div>
-     <div></div>
+    <!DOCTYPE html>
+    <html lang="es">
 
-    <div id="teclado">
-        <button>A</button>
-        <button>B</button>
-        <button>C</button>
-        <button>D</button>
-        <button>E</button>
-        <button>F</button>
-        <button>G</button>
-        <button>H</button>
-        <button>I</button>
-        <button>J</button>
-        <button>K</button>
-        <button>L</button>
-        <button>M</button>
-        <button>N</button>
-        <button>Ñ</button>
-        <button>O</button>
-        <button>P</button>
-        <button>Q</button>
-        <button>R</button>
-        <button>S</button>
-        <button>T</button>
-        <button>U</button>
-        <button>V</button>
-        <button>W</button>
-        <button>X</button>
-        <button>Y</button>
-        <button>Z</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Juego</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
 
-    </div>
+    <body>
+
+        <section id="section1">
+            <h1 id="Bienvenido">Bienvenido al juego</h1>
+            <button id="playButton">¡Jugar!</button>
+        </section>
+
+
+        <section id="section2" style="display: none;">
+            
+
+            <div id="sec2Content">
+                
+                <h2>Selecciona una categoría:</h2>
+                <ul>
+                    <li><button class="categoryButton" data-cate="Carros Deportivos">
+                            <img class="dificultad" src="./imagenesjuego/carros.jpg" alt="carros">
+                            Carros Deportivos</button></li>
+                    <li><button class="categoryButton" data-cate="Jugadores Futbol">
+                            <img class="dificultad" src="./imagenesjuego/futbol.jpg" alt="futbol">
+                            Jugadores Futbol</button></li>
+                    <li><button class="categoryButton" data-cate="Animales salvajes">
+                            <img class="dificultad" src="./imagenesjuego/salvaje.jpg" alt=" vida salvaje">
+                            Animales salvajes</button></li>
+                </ul>
+            </div>
+        </section>
+        <section id="section3" style="display: none;">
+
+            
+            <div id="sec2Content">
+            <h2><b>Selecciona una dificultad:</b></h2>
+            <ul>
+                <li><button class="difficultyButton" data-diff="0" data-fondo="./imagenesjuego/fondo1.jfif">
+                        <img class="dificultad2" src="./imagenesjuego/fondo1.jfif" alt="imagen dificil">
+                        Fácil</button></li>
+                <li><button class="difficultyButton" data-diff="1" data-fondo="./imagenesjuego/fondo2.jfif">
+                        <img class="dificultad2" src="./imagenesjuego/fondo2.jfif" alt="imagen dificil">
+                        Medio</button></li>
+                <li><button class="difficultyButton" data-diff="2" data-fondo="./imagenesjuego/dificil.jfif">
+                        <img class="dificultad2" src="./imagenesjuego/dificil.jfif" alt="imagen dificil">
+                        Difícil</button></li>
+            </ul>
+            </div>
+        </section>
+        <section id="game" style="display: none;">
+
+            <div id="matacho">
+                
+            </div>
+
+            <div id="lineas">
+
+            </div>
+
+            <div id="keyboard">
+                <!-- Se generará dinámicamente el teclado aquí -->
+            </div>
+        </section>
+
+
+        <script src="juego.js"></script>
+    </body>
+
+    </html>
+
+
 </body>
+
 </html>
